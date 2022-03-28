@@ -15,8 +15,11 @@ keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Naviagate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
+-- keymap("n", "<S-l>", ":bnext<CR>", opts)
+-- keymap("n", "<S-h>", ":bprevious<CR>", opts)
+keymap("n", "<S-l>", ":BufferLineCycleNext<CR>", opts)
+keymap("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
+keymap("n", "Q", ":bd<CR>", opts)
 
 -- Telescope
 keymap(
@@ -25,9 +28,9 @@ keymap(
 	"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
 	opts
 )
-keymap("n", "<C-b>", "<cmd>Telescope buffers<cr>", opts)
+keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts)
 keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
-keymap("n", "<leader>fb", "<cmd>Telescope file_browser<cr>", opts)
+keymap("n", "<space>fb", "<cmd>Telescope file_browser<cr>", opts)
 
 -- Resize  window
 keymap("n", "<S-Up>", ":resize +2<CR>", opts)

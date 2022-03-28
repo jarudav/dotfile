@@ -2,6 +2,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
+
 Plug 'numToStr/Comment.nvim'
 Plug 'akinsho/toggleterm.nvim'
 
@@ -32,7 +33,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " autopair
 Plug 'windwp/nvim-autopairs'
 
-" lualine
+" line
+Plug 'akinsho/bufferline.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
