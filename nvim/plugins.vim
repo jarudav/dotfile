@@ -14,7 +14,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 
 " colorschemes
-Plug 'overcache/NeoSolarized'
+Plug 'ishan9299/nvim-solarized-lua'
 
 " lsp
 Plug 'neovim/nvim-lspconfig'

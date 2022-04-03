@@ -14,13 +14,18 @@ local diagnostics = {
 	sources = { "nvim_diagnostic" },
 	sections = { "error", "warn" },
 	symbols = { error = " ", warn = " " }, --, info = " ", hint = " " },
-	colored = false,
+	colored = true,
 	always_visible = true,
 }
 
 local diff = {
 	"diff",
 	colored = true,
+	diff_color = {
+		added = { fg = "#145A32" },
+		modified = { fg = "#FF5733" },
+		removed = { fg = "#C70039" },
+	},
 	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
 }
 
@@ -37,25 +42,16 @@ local filename = {
 
 local filetype = {
 	"filetype",
-	colored = false,
+	colored = true,
 	icons_enabled = true,
 }
 
 local mode = {
 	"mode",
 	fmt = function(str)
-		return "-- " .. str .. " --"
+		return " " .. str .. " "
 	end,
 }
-
--- local progress = function()
--- 	local current_line = vim.fn.line(".")
--- 	local total_lines = vim.fn.line("$")
--- 	local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
--- 	local line_ratio = current_line / total_lines
--- 	local index = math.ceil(line_ratio * #chars)
--- 	return chars[index]
--- end
 
 local spaces = function()
 	return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
@@ -64,17 +60,17 @@ end
 lualine.setup({
 	options = {
 		icons_enabled = true,
-		theme = "auto",
+		theme = "solarized_dark",
 		-- section_separators = { left = "", right = "" },
 		-- component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
-		component_separators = { left = "", right = "" },
+		component_separators = { left = "|", right = "|" },
 		disabled_filetypes = {},
 		always_divide_middle = true,
 	},
 	sections = {
-		lualine_a = { branch, diff, diagnostics },
-		lualine_b = { mode },
+		lualine_a = { mode },
+		lualine_b = { branch, diff, diagnostics },
 		lualine_c = { filename },
 		lualine_x = { spaces, "encoding", filetype },
 		lualine_y = { "location" },
