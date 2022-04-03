@@ -3,7 +3,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 
-Plug 'numToStr/Comment.nvim'
+" file explorer
+Plug 'kyazdani42/nvim-tree.lua'
+
+" terminal
 Plug 'akinsho/toggleterm.nvim'
 
 " telescope
@@ -21,6 +24,7 @@ Plug 'williamboman/nvim-lsp-installer'
 " cmp
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'onsails/lspkind-nvim'
 
@@ -30,10 +34,11 @@ Plug 'L3MON4D3/LuaSnip'
 " treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-" autopair
+" utils
 Plug 'windwp/nvim-autopairs'
+Plug 'numToStr/Comment.nvim'
 
-" line
+" interface
 Plug 'akinsho/bufferline.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'

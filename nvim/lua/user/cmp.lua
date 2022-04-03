@@ -22,7 +22,7 @@ cmp.setup({
 	mapping = {
 		["<C-k>"] = cmp.mapping.select_prev_item(),
 		["<C-j>"] = cmp.mapping.select_next_item(),
-		["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+		["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
 		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
 		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
 		["<C-e>"] = cmp.mapping({
@@ -47,12 +47,26 @@ cmp.setup({
 	},
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
+		{ name = "path" },
 		{ name = "luasnip" },
 		{ name = "buffer" },
 	}),
 	formatting = {
-		fields = { "kind", "abbr", "menu" },
-		format = lspkind.cmp_format({ mode = "symbol", with_text = true, maxwidth = 50 }),
+		-- fields = { "kind", "abbr", "menu" },
+		format = lspkind.cmp_format({
+			mode = "symbol_text",
+			maxwidth = 50,
+			menu = {
+				buffer = "[buf]",
+				nvim_lsp = "[LSP]",
+				nvim_lua = "[api]",
+				path = "[path]",
+				luasnip = "[snip]",
+			},
+		}),
+	},
+	experimental = {
+		native_menu = false,
+		ghost_text = false,
 	},
 })
--- vim.cmd([[highlight! default link CmpItemKind CmpItemMenuDefault]])
