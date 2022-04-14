@@ -32,6 +32,7 @@ Plug 'onsails/lspkind-nvim'
 
 " snippets
 Plug 'L3MON4D3/LuaSnip'
+Plug 'rafamadriz/friendly-snippets'
 
 " treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
