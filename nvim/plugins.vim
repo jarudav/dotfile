@@ -15,6 +15,7 @@ Plug 'nvim-telescope/telescope-file-browser.nvim'
 
 " colorschemes
 Plug 'ishan9299/nvim-solarized-lua'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 " lsp
 Plug 'neovim/nvim-lspconfig'
