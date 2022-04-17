@@ -13,7 +13,7 @@ local diagnostics = {
 	"diagnostics",
 	sources = { "nvim_diagnostic" },
 	sections = { "error", "warn" },
-	symbols = { error = " ", warn = " " }, --, info = " ", hint = " " },
+	symbols = { error = " ", warn = " " }, --, info = " ", hint = " " },
 	colored = true,
 	always_visible = true,
 }
@@ -49,7 +49,7 @@ local filetype = {
 local mode = {
 	"mode",
 	fmt = function(str)
-		return " " .. str .. " "
+		return "" .. str .. ""
 	end,
 }
 
