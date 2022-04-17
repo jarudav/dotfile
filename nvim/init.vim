@@ -2,7 +2,8 @@ source $HOME/.config/nvim/plugins.vim
 
 lua require("user.autopairs")
 lua require("user.bufferline")
-lua require("user.cmp")
+" lua require("user.cmp")
+lua require("user.coq")
 lua require("user.colorscheme")
 lua require("user.comment")
 lua require("user.keymaps")

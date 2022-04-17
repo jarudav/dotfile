@@ -14,13 +14,17 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 
 " colorschemes
-Plug 'ishan9299/nvim-solarized-lua'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 " lsp
 Plug 'neovim/nvim-lspconfig'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'williamboman/nvim-lsp-installer'
+Plug 'tami5/lspsaga.nvim'
+
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 
 " cmp
 Plug 'hrsh7th/cmp-nvim-lsp'
