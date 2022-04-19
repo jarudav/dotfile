@@ -4,10 +4,6 @@ local keymap = vim.api.nvim_set_keymap
 
 keymap("n", "<esc><esc>", "<cmd>nohlsearch<CR>", opts)
 
--- run python
-keymap("n", "<leader>R", "%w !python", opts)
-keymap("v", "<leader>R", "w !python", opts)
-
 -- Navigate window
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
@@ -23,37 +19,39 @@ keymap("n", "<S-Right>", ":vertical resize +2<CR>", opts)
 -- Naviagate buffers
 keymap("n", "<S-l>", ":BufferLineCycleNext<CR>", opts)
 keymap("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
-keymap("n", "Q", ":bd<CR>", opts)
+keymap("n", "<leader>bd", ":bd<CR>", opts)
+
+-- Move line
+vim.keymap.set("n", "<C-l>j", ":m .+1<CR>==")
+vim.keymap.set("n", "<C-l>k", ":m .-2<CR>==")
+vim.keymap.set("v", "<C-l>j", ":m '>+1<CR>gv=gv")
+vim.keymap.set("i", "<C-l>j", "<Esc>:m .+1<CR>==gi")
+vim.keymap.set("i", "<C-l>k", "<Esc>:m .-2<CR>==gi")
+vim.keymap.set("v", "<C-l>k", ":m '<-2<CR>gv=gv")
 
 -- Telescope
-keymap("n", "<leader>f", "<cmd>lua require('telescope.builtin').find_files()<CR>", opts)
-keymap("n", "<leader><space>", "<cmd>lua require('telescope.builtin').buffers()<CR>", opts)
-keymap("n", "<leader>g", "<cmd>lua require('telescope.builtin').live_grep()<CR>", opts)
-keymap("n", "<leader>/", "<cmd>lua require('telescope.builtin').help_tags()<CR>", opts)
-keymap(
-	"n",
-	"<leader>s",
-	"<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown({}))<CR>",
-	opts
-)
-keymap(
-	"n",
-	"gr",
-	"<cmd>lua require('telescope.builtin').lsp_references(require('telescope.themes').get_dropdown({}))<CR>",
-	opts
-)
-keymap(
-	"n",
-	"gd",
-	"<cmd>lua require('telescope.builtin').lsp_definitions(require('telescope.themes').get_dropdown({}))<CR>",
-	opts
-)
-keymap(
-	"n",
-	"<leader>q",
-	"<cmd>lua require('telescope.builtin').diagnostics(require('telescope.themes').get_dropdown({bufnr=0}))<CR>",
-	opts
-)
+keymap("n", "<leader>f", "<cmd>lua require('telescope.builtin').find_files({ previewer = false })<CR>", opts)
+keymap("n", "<leader><space>", "<cmd>lua require('telescope.builtin').buffers({ sort_lastused = true })<CR>", opts)
+keymap("n", "<leader>sl", "<cmd>lua require('telescope.builtin').live_grep()<CR>", opts)
+keymap("n", "<leader>sg", "<cmd>lua require('telescope.builtin').grep_string()<CR>", opts)
+keymap("n", "<leader>h", "<cmd>lua require('telescope.builtin').help_tags()<CR>", opts)
+keymap("n", "<leader>of", "<cmd>lua require('telescope.builtin').oldfiles()<CR>", opts)
+
+keymap("n", "<leader>wo", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", opts)
+keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>", opts)
+keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", opts)
+keymap("n", "<leader>q", "<cmd>lua require('telescope.builtin').diagnostics()<CR>", opts)
+
+vim.keymap.set("n", "<leader>gc", function()
+	require("telescope.builtin").git_commits()
+end)
+vim.keymap.set("n", "<leader>gb", function()
+	require("telescope.builtin").git_branches()
+end)
+vim.keymap.set("n", "<leader>gs", function()
+	require("telescope.builtin").git_status()
+end)
+
 keymap("n", "<leader>fb", "<cmd>Telescope file_browser<CR>", opts)
 
 -- lspsaga
