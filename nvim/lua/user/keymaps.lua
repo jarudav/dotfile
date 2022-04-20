@@ -82,5 +82,12 @@ keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
 keymap("n", "<C-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<CR>", {})
 keymap("n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<CR>", {})
 
+-- Fugitive
+vim.keymap.set("n", "<space>g", ":Git<CR>", { silent = true })
+vim.keymap.set("n", "<space>ga", ":Git add %:p<CR><CR>", { silent = true })
+vim.keymap.set("n", "<space>gg", ":GBrowse<CR>", { silent = true })
+vim.keymap.set("n", "<space>gd", ":Gdiffsplit<CR>", { silent = true })
+vim.keymap.set("n", "<space>go", ":Git checkout<Space>", { silent = true })
+
 -- NvimTree
 keymap("n", "<C-n>", ":NvimTreeToggle<CR>", opts)

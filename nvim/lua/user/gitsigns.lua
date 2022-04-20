@@ -14,5 +14,6 @@ gitsigns.setup({
 	on_attach = function(bufnr)
 		vim.keymap.set("n", "[c", require("gitsigns").prev_hunk, { buffer = bufnr })
 		vim.keymap.set("n", "]c", require("gitsigns").next_hunk, { buffer = bufnr })
+		vim.keymap.set("n", "<space>gp", require("gitsigns").preview_hunk, { buffer = bufnr })
 	end,
 })

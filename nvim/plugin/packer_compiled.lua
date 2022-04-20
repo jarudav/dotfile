@@ -134,6 +134,11 @@ _G.packer_plugins = {
     path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
   ["lspkind-nvim"] = {
     loaded = true,
     path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
@@ -204,10 +209,10 @@ _G.packer_plugins = {
     path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
   },
-  ["telescope-file-browser.nvim"] = {
+  ["telescope-fzf-native.nvim"] = {
     loaded = true,
-    path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim",
-    url = "https://github.com/nvim-telescope/telescope-file-browser.nvim"
+    path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
@@ -223,6 +228,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
     url = "https://github.com/folke/tokyonight.nvim"
+  },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["vim-rhubarb"] = {
+    loaded = true,
+    path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/vim-rhubarb",
+    url = "https://github.com/tpope/vim-rhubarb"
   }
 }
 

@@ -33,7 +33,7 @@ packer.startup({
 
 		--  telescope
 		use("nvim-telescope/telescope.nvim")
-		use("nvim-telescope/telescope-file-browser.nvim")
+		use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
 		--  colorschemes
 		use("folke/tokyonight.nvim")
@@ -75,8 +75,11 @@ packer.startup({
 		use("akinsho/bufferline.nvim")
 		use("nvim-lualine/lualine.nvim")
 		use("kyazdani42/nvim-web-devicons")
+		use("lukas-reineke/indent-blankline.nvim")
 
 		--  git
+		use("tpope/vim-fugitive")
+		use("tpope/vim-rhubarb")
 		use("lewis6991/gitsigns.nvim")
 	end,
 	config = {

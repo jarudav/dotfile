@@ -10,8 +10,6 @@ end
 
 telescope.setup({
 	defaults = {
-		prompt_prefix = "  ",
-		selection_caret = " ",
 		path_display = { "smart" },
 		file_ignore_patterns = { "%.pyc" },
 		mappings = {
@@ -23,8 +21,13 @@ telescope.setup({
 		},
 	},
 	extensions = {
-		file_browser = {},
+		fzf = {
+			fuzzy = true, -- false will only do exact matching
+			override_generic_sorter = true, -- override the generic sorter
+			override_file_sorter = true, -- override the file sorter
+			case_mode = "smart_case",
+		},
 	},
 })
 
-telescope.load_extension("file_browser")
+telescope.load_extension("fzf")
