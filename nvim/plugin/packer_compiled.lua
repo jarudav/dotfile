@@ -169,6 +169,11 @@ _G.packer_plugins = {
     path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
+  },
   ["nvim-lsp-installer"] = {
     loaded = true,
     path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
@@ -188,6 +193,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["nvim-treesitter-textobjects"] = {
+    loaded = true,
+    path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textobjects",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
@@ -233,6 +243,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["vim-illuminate"] = {
+    loaded = true,
+    path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/vim-illuminate",
+    url = "https://github.com/RRethy/vim-illuminate"
   },
   ["vim-rhubarb"] = {
     loaded = true,

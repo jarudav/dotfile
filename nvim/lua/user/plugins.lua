@@ -66,6 +66,7 @@ packer.startup({
 			"nvim-treesitter/nvim-treesitter",
 			run = ":TSUpdate",
 		})
+		use("nvim-treesitter/nvim-treesitter-textobjects")
 
 		--  utils
 		use("windwp/nvim-autopairs")
@@ -76,11 +77,15 @@ packer.startup({
 		use("nvim-lualine/lualine.nvim")
 		use("kyazdani42/nvim-web-devicons")
 		use("lukas-reineke/indent-blankline.nvim")
+		use("RRethy/vim-illuminate")
 
 		--  git
 		use("tpope/vim-fugitive")
 		use("tpope/vim-rhubarb")
 		use("lewis6991/gitsigns.nvim")
+
+		-- Debug Adapter Protocol
+		use("mfussenegger/nvim-dap")
 	end,
 	config = {
 		display = {
