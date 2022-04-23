@@ -85,3 +85,6 @@ vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", opts)
 -- Bufferline
 vim.keymap.set("n", "[b", ":BufferLineMovePrev<CR>", { silent = true })
 vim.keymap.set("n", "]b", ":BufferLineMoveNext<CR>", { silent = true })
+
+-- ToggleTerm
+vim.keymap.set("n", "<space>lg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
