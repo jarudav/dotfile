@@ -61,7 +61,7 @@ vim.keymap.set("n", "<space>gs", ":Telescope git_status<CR>", { silent = true })
 -- lspsaga
 vim.keymap.set("n", "gf", ":Lspsaga lsp_finder<CR>", opts)
 vim.keymap.set("n", "K", ":Lspsaga hover_doc<CR>", opts)
-vim.keymap.set("i", "<C-k>", ":Lspsaga signature_help<CR>", opts)
+vim.keymap.set("i", "<C-k>", "<cmd>Lspsaga signature_help<CR>", opts)
 vim.keymap.set("n", "<space>rn", ":Lspsaga rename<CR>", opts)
 vim.keymap.set("n", "<space>ca", ":Lspsaga code_action<CR>", opts)
 vim.keymap.set("x", "<space>ca", ":<c-u>Lspsaga range_code_action<CR>", opts)
