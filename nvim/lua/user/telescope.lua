@@ -13,10 +13,12 @@ telescope.setup({
 		path_display = { "smart" },
 		file_ignore_patterns = { "%.pyc" },
 		mappings = {
-			i = {},
-
+			i = {
+				["<C-w>"] = actions.delete_buffer,
+			},
 			n = {
 				["q"] = actions.close,
+				["w"] = actions.delete_buffer,
 			},
 		},
 	},
