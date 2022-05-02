@@ -78,6 +78,7 @@ packer.startup({
 		use("kyazdani42/nvim-web-devicons")
 		use("lukas-reineke/indent-blankline.nvim")
 		use("RRethy/vim-illuminate")
+		use("karb94/neoscroll.nvim")
 
 		--  git
 		use("tpope/vim-fugitive")

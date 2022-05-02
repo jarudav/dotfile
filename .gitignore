@@ -4,4 +4,4 @@ fish/
 zsh/
 iterm2/
 starship/
-nvim/autoload
+nvim/plugin
