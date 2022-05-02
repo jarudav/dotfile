@@ -1,7 +1,5 @@
 local opts = { noremap = true, silent = true }
 
-local keymap = vim.api.nvim_set_keymap
-
 vim.keymap.set("n", "<esc><esc>", ":nohlsearch<CR>", opts)
 
 -- Navigate window
@@ -22,15 +20,15 @@ vim.keymap.set("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
 vim.keymap.set("n", "<space>bd", ":bd<CR>", opts)
 
 -- Move line
-vim.keymap.set("n", "<C-s>j", ":m .+1<CR>==", { silent = true })
-vim.keymap.set("n", "<C-s>k", ":m .-2<CR>==", { silent = true })
-vim.keymap.set("v", "<C-s>j", ":m '>+1<CR>gv=gv", { silent = true })
-vim.keymap.set("i", "<C-s>j", "<Esc>:m .+1<CR>==gi", { silent = true })
-vim.keymap.set("i", "<C-s>k", "<Esc>:m .-2<CR>==gi", { silent = true })
-vim.keymap.set("v", "<C-s>k", ":m '<-2<CR>gv=gv", { silent = true })
+vim.keymap.set("n", "<C-s>j", ":m .+1<CR>==", opts)
+vim.keymap.set("n", "<C-s>k", ":m .-2<CR>==", opts)
+vim.keymap.set("v", "<C-s>j", ":m '>+1<CR>gv=gv", opts)
+vim.keymap.set("i", "<C-s>j", "<Esc>:m .+1<CR>==gi", opts)
+vim.keymap.set("i", "<C-s>k", "<Esc>:m .-2<CR>==gi", opts)
+vim.keymap.set("v", "<C-s>k", ":m '<-2<CR>gv=gv", opts)
 
 -- annoy keybind
-vim.keymap.set("", "J", "<Nop>", { silent = true })
+vim.keymap.set("", "J", "<Nop>", opts)
 
 -- Telescope
 function TelescopeFiles()
@@ -47,16 +45,16 @@ vim.keymap.set("n", "<space>sl", ":Telescope live_grep<CR>", opts)
 vim.keymap.set("n", "<space>sg", ":Telescope grep_string<CR>", opts)
 vim.keymap.set("n", "<space>h", ":Telescope help_tags<CR>", opts)
 vim.keymap.set("n", "<space>of", ":Telescope oldfiles<CR>", opts)
-vim.keymap.set("n", "<space>sb", ":Telescope current_buffer_fuzzy_find<CR>", { silent = true })
+vim.keymap.set("n", "<space>sb", ":Telescope current_buffer_fuzzy_find<CR>", opts)
 
 vim.keymap.set("n", "<space>wo", ":Telescope lsp_document_symbols<CR>", opts)
 vim.keymap.set("n", "gr", ":Telescope lsp_references<CR>", opts)
 vim.keymap.set("n", "gd", ":Telescope lsp_definitions<CR>", opts)
 vim.keymap.set("n", "<space>q", ":Telescope diagnostics bufnr=0<CR>", opts)
 
-vim.keymap.set("n", "<space>gc", ":Telescope git_commits<CR>", { silent = true })
-vim.keymap.set("n", "<space>gb", ":Telescope git_branches<CR>", { silent = true })
-vim.keymap.set("n", "<space>gs", ":Telescope git_status<CR>", { silent = true })
+vim.keymap.set("n", "<space>gc", ":Telescope git_commits<CR>", opts)
+vim.keymap.set("n", "<space>gb", ":Telescope git_branches<CR>", opts)
+vim.keymap.set("n", "<space>gs", ":Telescope git_status<CR>", opts)
 
 -- lspsaga
 vim.keymap.set("n", "gf", ":Lspsaga lsp_finder<CR>", opts)
@@ -73,18 +71,18 @@ vim.keymap.set("n", "<C-u>", "<cmd>lua require('lspsaga.action').smart_scroll_wi
 vim.keymap.set("n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<CR>", {})
 
 -- Fugitive
-vim.keymap.set("n", "<space>g", ":Git<CR>", { silent = true })
-vim.keymap.set("n", "<space>ga", ":Git add %:p<CR><CR>", { silent = true })
-vim.keymap.set("n", "<space>gg", ":GBrowse<CR>", { silent = true })
-vim.keymap.set("n", "<space>gd", ":Gdiffsplit<CR>", { silent = true })
-vim.keymap.set("n", "<space>go", ":Git checkout<Space>", { silent = true })
+vim.keymap.set("n", "<space>g", ":Git<CR>", opts)
+vim.keymap.set("n", "<space>ga", ":Git add %:p<CR><CR>", opts)
+vim.keymap.set("n", "<space>gg", ":GBrowse<CR>", opts)
+vim.keymap.set("n", "<space>gd", ":Gdiffsplit<CR>", opts)
+vim.keymap.set("n", "<space>go", ":Git checkout<Space>", opts)
 
 -- NvimTree
 vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", opts)
 
 -- Bufferline
-vim.keymap.set("n", "[b", ":BufferLineMovePrev<CR>", { silent = true })
-vim.keymap.set("n", "]b", ":BufferLineMoveNext<CR>", { silent = true })
+vim.keymap.set("n", "[b", ":BufferLineMovePrev<CR>", opts)
+vim.keymap.set("n", "]b", ":BufferLineMoveNext<CR>", opts)
 
 -- ToggleTerm
 vim.keymap.set("n", "<space>lg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)

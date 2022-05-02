@@ -4,8 +4,6 @@ vim.g.coq_settings = {
 		recommended = true,
 		manual_complete = "<C-p>",
 		bigger_preview = "<C-b>",
-		jump_to_mark = "<C-m>",
-		-- eval_snips = "",
-		-- ["repeat"] = "",
+		jump_to_mark = "<C-f>",
 	},
 }

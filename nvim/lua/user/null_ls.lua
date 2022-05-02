@@ -3,6 +3,7 @@ if not staus_ok then
 	return
 end
 
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local formatting = null_ls.builtins.formatting
 -- local diagnostics = null_ls.builtins.diagnostics
 local sources = {
@@ -25,11 +26,4 @@ null_ls.setup({
 			})
 		end
 	end,
-	-- on_attach = function(client)
-	-- 	if client.resolved_capabilities.document_formatting then
-	-- 		vim.cmd([[
-	--                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-	--            ]])
-	-- 	end
-	-- end,
 })
