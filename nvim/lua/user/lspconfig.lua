@@ -8,8 +8,13 @@ if not lspconfig_status_ok then
 	return
 end
 
-local coq_status_ok, coq = pcall(require, "coq")
-if not coq_status_ok then
+-- local coq_status_ok, coq = pcall(require, "coq")
+-- if not coq_status_ok then
+-- 	return
+-- end
+
+local cmp_status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not cmp_status_ok then
 	return
 end
 
@@ -81,8 +86,11 @@ local on_attach = function(client, bufnr)
 	illuminate.on_attach(client)
 end
 
+local capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup(coq.lsp_ensure_capabilities({
+	lspconfig[lsp].setup({
 		on_attach = on_attach,
-	}))
+		capabilities = capabilities,
+	})
 end

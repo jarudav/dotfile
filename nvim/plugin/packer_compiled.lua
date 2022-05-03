@@ -109,21 +109,6 @@ _G.packer_plugins = {
     path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
-  ["coq.artifacts"] = {
-    loaded = true,
-    path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/coq.artifacts",
-    url = "https://github.com/ms-jpq/coq.artifacts"
-  },
-  ["coq.thirdparty"] = {
-    loaded = true,
-    path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/coq.thirdparty",
-    url = "https://github.com/ms-jpq/coq.thirdparty"
-  },
-  coq_nvim = {
-    loaded = true,
-    path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/coq_nvim",
-    url = "https://github.com/ms-jpq/coq_nvim"
-  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/Users/jarudatevorasee/.local/share/nvim/site/pack/packer/start/friendly-snippets",
