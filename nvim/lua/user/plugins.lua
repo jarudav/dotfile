@@ -42,7 +42,7 @@ packer.startup({
 		use("neovim/nvim-lspconfig")
 		use("jose-elias-alvarez/null-ls.nvim")
 		use("williamboman/nvim-lsp-installer")
-		use("tami5/lspsaga.nvim")
+		use("j-hui/fidget.nvim")
 
 		--  cmp
 		use("hrsh7th/cmp-nvim-lsp")

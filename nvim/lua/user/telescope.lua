@@ -14,6 +14,8 @@ telescope.setup({
 		file_ignore_patterns = { "%.pyc" },
 		mappings = {
 			i = {
+				["<C-j>"] = actions.move_selection_next,
+				["<C-k>"] = actions.move_selection_previous,
 				["<C-w>"] = actions.delete_buffer,
 			},
 			n = {

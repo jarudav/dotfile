@@ -8,4 +8,7 @@ nvim_tree.setup({
 		number = true,
 		relativenumber = true,
 	},
+	filters = {
+		custom = { ".DS_Store", "__pycache__", "*.pyc" },
+	},
 })

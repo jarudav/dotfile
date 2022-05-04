@@ -14,9 +14,7 @@ vim.keymap.set("n", "<S-Down>", ":resize -2<CR>", opts)
 vim.keymap.set("n", "<S-Left>", ":vertical resize -2<CR>", opts)
 vim.keymap.set("n", "<S-Right>", ":vertical resize +2<CR>", opts)
 
--- Naviagate buffers
-vim.keymap.set("n", "<S-l>", ":BufferLineCycleNext<CR>", opts)
-vim.keymap.set("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
+-- Buffers
 vim.keymap.set("n", "<space>bd", ":bd<CR>", opts)
 
 -- Move line
@@ -57,18 +55,18 @@ vim.keymap.set("n", "<space>gb", ":Telescope git_branches<CR>", opts)
 vim.keymap.set("n", "<space>gs", ":Telescope git_status<CR>", opts)
 
 -- lspsaga
-vim.keymap.set("n", "gf", ":Lspsaga lsp_finder<CR>", opts)
-vim.keymap.set("n", "K", ":Lspsaga hover_doc<CR>", opts)
-vim.keymap.set("i", "<C-k>", "<cmd>Lspsaga signature_help<CR>", opts)
-vim.keymap.set("n", "<space>rn", ":Lspsaga rename<CR>", opts)
-vim.keymap.set("n", "<space>ca", ":Lspsaga code_action<CR>", opts)
-vim.keymap.set("x", "<space>ca", ":<c-u>Lspsaga range_code_action<CR>", opts)
-vim.keymap.set("n", "<space>e", ":Lspsaga show_line_diagnostics<CR>", opts)
-vim.keymap.set("n", "gp", ":Lspsaga preview_definition<CR>", opts)
-vim.keymap.set("n", "]d", ":Lspsaga diagnostic_jump_next<CR>", opts)
-vim.keymap.set("n", "[d", ":Lspsaga diagnostic_jump_prev<CR>", opts)
-vim.keymap.set("n", "<C-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<CR>", {})
-vim.keymap.set("n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<CR>", {})
+-- vim.keymap.set("n", "gf", ":Lspsaga lsp_finder<CR>", opts)
+-- vim.keymap.set("n", "K", ":Lspsaga hover_doc<CR>", opts)
+-- vim.keymap.set("i", "<C-k>", "<cmd>Lspsaga signature_help<CR>", opts)
+-- vim.keymap.set("n", "<space>rn", ":Lspsaga rename<CR>", opts)
+-- vim.keymap.set("n", "<space>ca", ":Lspsaga code_action<CR>", opts)
+-- vim.keymap.set("x", "<space>ca", ":<c-u>Lspsaga range_code_action<CR>", opts)
+-- vim.keymap.set("n", "<space>e", ":Lspsaga show_line_diagnostics<CR>", opts)
+-- vim.keymap.set("n", "gp", ":Lspsaga preview_definition<CR>", opts)
+-- vim.keymap.set("n", "]d", ":Lspsaga diagnostic_jump_next<CR>", opts)
+-- vim.keymap.set("n", "[d", ":Lspsaga diagnostic_jump_prev<CR>", opts)
+-- vim.keymap.set("n", "<C-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<CR>", {})
+-- vim.keymap.set("n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<CR>", {})
 
 -- Fugitive
 vim.keymap.set("n", "<space>g", ":Git<CR>", opts)
@@ -81,6 +79,8 @@ vim.keymap.set("n", "<space>go", ":Git checkout<Space>", opts)
 vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", opts)
 
 -- Bufferline
+vim.keymap.set("n", "<S-l>", ":BufferLineCycleNext<CR>", opts)
+vim.keymap.set("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
 vim.keymap.set("n", "[b", ":BufferLineMovePrev<CR>", opts)
 vim.keymap.set("n", "]b", ":BufferLineMoveNext<CR>", opts)
 
