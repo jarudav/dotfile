@@ -38,35 +38,18 @@ function TelescopeFiles()
 end
 vim.keymap.set("n", "<space>f", TelescopeFiles)
 
-vim.keymap.set("n", "<space><space>", ":lua require('telescope.builtin').buffers({ sort_lastused = true })<CR>", opts)
-vim.keymap.set("n", "<space>sl", ":Telescope live_grep<CR>", opts)
-vim.keymap.set("n", "<space>sg", ":Telescope grep_string<CR>", opts)
-vim.keymap.set("n", "<space>h", ":Telescope help_tags<CR>", opts)
-vim.keymap.set("n", "<space>of", ":Telescope oldfiles<CR>", opts)
-vim.keymap.set("n", "<space>sb", ":Telescope current_buffer_fuzzy_find<CR>", opts)
-
-vim.keymap.set("n", "<space>wo", ":Telescope lsp_document_symbols<CR>", opts)
-vim.keymap.set("n", "gr", ":Telescope lsp_references<CR>", opts)
-vim.keymap.set("n", "gd", ":Telescope lsp_definitions<CR>", opts)
-vim.keymap.set("n", "<space>q", ":Telescope diagnostics bufnr=0<CR>", opts)
+vim.keymap.set("n", "<space><space>", function()
+	require("telescope.builtin").buffers({ sort_lastused = true })
+end, opts)
+vim.keymap.set("n", "<space>sl", require("telescope.builtin").live_grep, opts)
+vim.keymap.set("n", "<space>sg", require("telescope.builtin").grep_string, opts)
+vim.keymap.set("n", "<space>h", require("telescope.builtin").help_tags, opts)
+vim.keymap.set("n", "<space>of", require("telescope.builtin").oldfiles, opts)
+vim.keymap.set("n", "<space>sb", require("telescope.builtin").current_buffer_fuzzy_find, opts)
 
 vim.keymap.set("n", "<space>gc", ":Telescope git_commits<CR>", opts)
 vim.keymap.set("n", "<space>gb", ":Telescope git_branches<CR>", opts)
 vim.keymap.set("n", "<space>gs", ":Telescope git_status<CR>", opts)
-
--- lspsaga
--- vim.keymap.set("n", "gf", ":Lspsaga lsp_finder<CR>", opts)
--- vim.keymap.set("n", "K", ":Lspsaga hover_doc<CR>", opts)
--- vim.keymap.set("i", "<C-k>", "<cmd>Lspsaga signature_help<CR>", opts)
--- vim.keymap.set("n", "<space>rn", ":Lspsaga rename<CR>", opts)
--- vim.keymap.set("n", "<space>ca", ":Lspsaga code_action<CR>", opts)
--- vim.keymap.set("x", "<space>ca", ":<c-u>Lspsaga range_code_action<CR>", opts)
--- vim.keymap.set("n", "<space>e", ":Lspsaga show_line_diagnostics<CR>", opts)
--- vim.keymap.set("n", "gp", ":Lspsaga preview_definition<CR>", opts)
--- vim.keymap.set("n", "]d", ":Lspsaga diagnostic_jump_next<CR>", opts)
--- vim.keymap.set("n", "[d", ":Lspsaga diagnostic_jump_prev<CR>", opts)
--- vim.keymap.set("n", "<C-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<CR>", {})
--- vim.keymap.set("n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<CR>", {})
 
 -- Fugitive
 vim.keymap.set("n", "<space>g", ":Git<CR>", opts)
