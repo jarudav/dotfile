@@ -67,6 +67,7 @@ packer.startup({
 		--  utils
 		use("windwp/nvim-autopairs")
 		use("numToStr/Comment.nvim")
+		use("tpope/vim-surround")
 
 		--  UI
 		use("akinsho/bufferline.nvim")
