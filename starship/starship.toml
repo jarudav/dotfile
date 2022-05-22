@@ -1,0 +1,8 @@
+add_newline = false
+command_timeout = 1000
+
+[directory]
+truncation_length = 8
+
+[line_break]
+disabled = false

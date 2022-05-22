@@ -1,7 +1,5 @@
 .DS_Store
 .mono/
-fish/
 zsh/
 iterm2/
-starship/
 nvim/plugin/
