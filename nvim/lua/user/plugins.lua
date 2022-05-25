@@ -84,6 +84,8 @@ packer.startup({
 
 		-- Debug Adapter Protocol
 		use("mfussenegger/nvim-dap")
+		use("mfussenegger/nvim-dap-python")
+		use("rcarriga/nvim-dap-ui")
 	end,
 	config = {
 		display = {

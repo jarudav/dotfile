@@ -72,3 +72,11 @@ vim.keymap.set("n", "<space>lg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 vim.keymap.set("n", "<space>ip", "<cmd>lua _IPYTHON_TOGGLE()<CR>", opts)
 vim.keymap.set("n", "<space>sl", ":ToggleTermSendCurrentLine 2<CR>", opts)
 vim.keymap.set("v", "<space>sl", ":ToggleTermSendVisualLines 2<CR>", opts)
+
+-- DAP
+vim.keymap.set("n", "<leader>db", require("dap").continue, opts)
+vim.keymap.set("n", "<leader>dc", require("dap").close, opts)
+vim.keymap.set("n", "<leader>dq", require("dapui").toggle, opts)
+vim.keymap.set("n", "<leader>b", require("dap").toggle_breakpoint, opts)
+vim.keymap.set("n", "<leader>n", require("dap").step_over, opts)
+vim.keymap.set("n", "<leader>s", require("dap").step_into, opts)
