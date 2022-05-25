@@ -43,3 +43,7 @@ local lazygit = Terminal:new({ cmd = "lazygit", count = 3, hidden = true, direct
 function _LAZYGIT_TOGGLE()
 	lazygit:toggle()
 end
+
+function _RUN_PYTHON()
+	vim.cmd("TermExec cmd='python %:p'")
+end
