@@ -15,7 +15,7 @@ vim.keymap.set("n", "<S-Left>", ":vertical resize -2<CR>", opts)
 vim.keymap.set("n", "<S-Right>", ":vertical resize +2<CR>", opts)
 
 -- Buffers
-vim.keymap.set("n", "<space>bd", ":bd<CR>", opts)
+vim.keymap.set("n", "<leader>bd", ":bd<CR>", opts)
 
 -- Move line
 vim.keymap.set("n", "<C-s>j", ":m .+1<CR>==", opts)
@@ -75,9 +75,9 @@ vim.keymap.set("n", "<space>l", ":ToggleTermSendCurrentLine 2<CR>", opts)
 vim.keymap.set("v", "<space>l", ":ToggleTermSendVisualLines 2<CR>", opts)
 
 -- DAP
-vim.keymap.set("n", "<leader>db", require("dap").continue, opts)
-vim.keymap.set("n", "<leader>dc", require("dap").close, opts)
-vim.keymap.set("n", "<leader>dq", require("dapui").toggle, opts)
-vim.keymap.set("n", "<leader>b", require("dap").toggle_breakpoint, opts)
-vim.keymap.set("n", "<leader>n", require("dap").step_over, opts)
-vim.keymap.set("n", "<leader>s", require("dap").step_into, opts)
+vim.keymap.set("n", "<space>db", require("dap").continue, opts)
+vim.keymap.set("n", "<space>dc", require("dap").close, opts)
+vim.keymap.set("n", "<space>dq", require("dapui").toggle, opts)
+vim.keymap.set("n", "<space>b", require("dap").toggle_breakpoint, opts)
+vim.keymap.set("n", "<space>n", require("dap").step_over, opts)
+vim.keymap.set("n", "<space>i", require("dap").step_into, opts)
