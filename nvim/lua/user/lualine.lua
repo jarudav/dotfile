@@ -19,8 +19,8 @@ lualine.setup({
 		lualine_b = { "branch", "diff", "diagnostics" },
 		lualine_c = { "filename" },
 		lualine_x = { "encoding", "fileformat", "filetype" },
-		lualine_y = { "location" },
-		lualine_z = { "progress" },
+		lualine_y = { "progress" },
+		lualine_z = { "location" },
 	},
 	inactive_sections = {
 		lualine_a = {},
@@ -31,5 +31,5 @@ lualine.setup({
 		lualine_z = {},
 	},
 	tabline = {},
-	extensions = { "fugitive", "nvim-tree", "toggleterm" },
+	extensions = { "fugitive", "nvim-tree", "quickfix", "toggleterm" },
 })
