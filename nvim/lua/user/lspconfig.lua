@@ -90,13 +90,10 @@ local handlers = {
 	["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
 	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
 	["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-		virtual_text = {
-			prefix = "",
-			-- source = "always",
-		},
+		virtual_text = true,
 		signs = false,
 		update_in_insert = true,
-		underline = true,
+		-- underline = true,
 		severity_sort = true,
 	}),
 }
