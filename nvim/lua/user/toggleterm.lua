@@ -44,6 +44,10 @@ function _LAZYGIT_TOGGLE()
 	lazygit:toggle()
 end
 
-function _RUN_PYTHON()
-	vim.cmd("TermExec cmd='python %:p'")
+function _RUN_HORIZONTAL()
+	vim.cmd("4TermExec cmd='python %:p'")
+end
+
+function _RUN_VERTICAL()
+	vim.cmd("5TermExec cmd='python %:p' direction='vertical'")
 end
