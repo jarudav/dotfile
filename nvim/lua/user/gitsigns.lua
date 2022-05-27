@@ -4,13 +4,7 @@ if not status_ok then
 end
 
 gitsigns.setup({
-	signs = {
-		add = { text = "+" },
-		change = { text = "~" },
-		delete = { text = "_" },
-		topdelete = { text = "?" },
-		changedelete = { text = "~" },
-	},
+	signs = {},
 	on_attach = function(bufnr)
 		vim.keymap.set("n", "[c", require("gitsigns").prev_hunk, { buffer = bufnr })
 		vim.keymap.set("n", "]c", require("gitsigns").next_hunk, { buffer = bufnr })
