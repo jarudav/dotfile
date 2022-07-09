@@ -5,10 +5,15 @@ end
 
 nvim_tree.setup({
 	view = {
+		adaptive_size = true,
 		number = true,
 		relativenumber = true,
 	},
+	renderer = {
+		group_empty = true,
+	},
 	filters = {
 		custom = { ".DS_Store", "__pycache__", "*.pyc" },
+		dotfiles = true,
 	},
 })
