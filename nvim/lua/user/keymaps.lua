@@ -70,7 +70,7 @@ vim.keymap.set("n", "]b", ":BufferLineMoveNext<CR>", opts)
 -- ToggleTerm
 vim.keymap.set("n", "<space>lg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 vim.keymap.set("n", "<space>ip", "<cmd>lua _IPYTHON_TOGGLE()<CR>", opts)
-vim.keymap.set("n", "<space>tl", "<cmd>lua _VERTICAL_TOGGLE()<CR>", opts)
+vim.keymap.set("n", "<space>\\", "<cmd>lua _VERTICAL_TOGGLE()<CR>", opts)
 vim.keymap.set("n", "<space>kt", "<cmd>4ToggleTerm<CR>", opts)
 vim.keymap.set("n", "<space>l", ":ToggleTermSendCurrentLine 2<CR>", opts)
 vim.keymap.set("v", "<space>l", ":ToggleTermSendVisualLines 2<CR>", opts)
