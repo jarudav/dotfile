@@ -13,11 +13,6 @@ if not cmp_status_ok then
 	return
 end
 
-local illuminate_status_ok, illuminate = pcall(require, "illuminate")
-if not illuminate_status_ok then
-	return
-end
-
 local fidget_status_ok, fidget = pcall(require, "fidget")
 if not fidget_status_ok then
 	return
@@ -81,9 +76,6 @@ local on_attach = function(client, bufnr)
 	then
 		client.resolved_capabilities.document_formatting = false
 	end
-
-	-- illuminate
-	illuminate.on_attach(client)
 end
 
 local handlers = {
@@ -93,7 +85,7 @@ local handlers = {
 		virtual_text = true,
 		signs = false,
 		update_in_insert = true,
-		-- underline = true,
+		underline = true,
 		severity_sort = true,
 	}),
 }
