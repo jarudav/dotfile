@@ -6,6 +6,7 @@ local options = {
 	cursorline = true,
 	expandtab = true,
 	fileencoding = "utf-8", -- the encoding written to a file
+	hidden = true,
 	hlsearch = true, -- highlight all matches on previous search pattern
 	ignorecase = true, -- ignore case in search patterns
 	mouse = "", -- allow the mouse to be used inneovim
