@@ -1,5 +1,3 @@
-vim.cmd([[colorscheme tokyonight]])
-
 require("tokyonight").setup({
 	style = "storm", -- The theme comes in three styles, `storm`, a darker variant `night` and `day`
 	transparent = true, -- Enable this to disable setting the background color
@@ -7,10 +5,10 @@ require("tokyonight").setup({
 	styles = {
 		-- Style to be applied to different syntax groups
 		-- Value is any valid attr-list value `:help attr-list`
-		comments = "italic",
-		keywords = "italic",
-		functions = "NONE",
-		variables = "NONE",
+		comments = { italic = true },
+		keywords = { italic = true },
+		functions = {},
+		variables = {},
 		-- Background styles. Can be "dark", "transparent" or "normal"
 		sidebars = "dark", -- style for sidebars, see below
 		floats = "dark", -- style for floating windows
@@ -32,3 +30,5 @@ require("tokyonight").setup({
 	---@param colors ColorScheme
 	on_highlights = function(highlights, colors) end,
 })
+
+vim.cmd([[colorscheme tokyonight]])
