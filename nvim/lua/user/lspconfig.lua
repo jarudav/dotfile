@@ -22,7 +22,6 @@ fidget.setup({})
 
 local servers = {
 	"pyright",
-	"yamlls",
 	"jsonls",
 	"sumneko_lua",
 }
