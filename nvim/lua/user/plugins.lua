@@ -1,13 +1,10 @@
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-	vim.fn.execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
-end
-
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
+	print("Packer is not installed")
 	return
 end
+
+vim.cmd([[packadd packer.nvim]])
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.cmd([[
@@ -40,8 +37,10 @@ packer.startup({
 
 		--  lsp
 		use("neovim/nvim-lspconfig")
+		use("williamboman/mason.nvim")
+		use("williamboman/mason-lspconfig.nvim")
 		use("jose-elias-alvarez/null-ls.nvim")
-		use("williamboman/nvim-lsp-installer")
+		-- use("williamboman/nvim-lsp-installer")
 		use("j-hui/fidget.nvim")
 
 		--  cmp
