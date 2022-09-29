@@ -54,9 +54,6 @@ set -g fish_pager_color_description $comment
 # =============================================================================
 # alias {{{
 # =============================================================================
-# alias vi '$EDITOR'
-# alias vim '$EDITOR'
-
 function ls
     exa --icons $argv
 end
@@ -116,8 +113,9 @@ end
 # =============================================================================
 # pyenv {{{
 # =============================================================================
-fish_add_path $HOME/.pyenv
-fish_add_path $HOME/.pyenv/bin
+set -g PYENV $HOME/.pyenv
+set -gx PATH $PYENV/bin $PATH
+
 pyenv init - | source
 
 # }}}
@@ -126,7 +124,8 @@ pyenv init - | source
 # =============================================================================
 # starship prompt {{{
 # =============================================================================
-starship init fish | source
 set -gx STARSHIP_CONFIG $HOME/.config/starship/starship.toml
+
+starship init fish | source
 
 # }}}
