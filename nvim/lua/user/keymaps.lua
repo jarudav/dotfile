@@ -29,34 +29,28 @@ vim.keymap.set("v", "<C-s>k", ":m '<-2<CR>gv=gv", opts)
 vim.keymap.set("", "J", "<Nop>", opts)
 
 -- Telescope
-function TelescopeFiles()
-	local telescope_opts = { previewer = false }
-	local ok = pcall(require("telescope.builtin").git_files, telescope_opts)
-	if not ok then
-		require("telescope.builtin").find_files(telescope_opts)
-	end
-end
-vim.keymap.set("n", "<space>f", TelescopeFiles)
-
-vim.keymap.set("n", "<space><space>", function()
+vim.keymap.set("n", "ff", require("telescope.builtin").find_files, opts)
+vim.keymap.set("n", "fb", function()
 	require("telescope.builtin").buffers({ sort_lastused = true })
 end, opts)
-vim.keymap.set("n", "<space>lg", require("telescope.builtin").live_grep, opts)
-vim.keymap.set("n", "<space>gs", require("telescope.builtin").grep_string, opts)
-vim.keymap.set("n", "<space>h", require("telescope.builtin").help_tags, opts)
-vim.keymap.set("n", "<space>of", require("telescope.builtin").oldfiles, opts)
-vim.keymap.set("n", "<space>sb", require("telescope.builtin").current_buffer_fuzzy_find, opts)
+vim.keymap.set("n", "fg", require("telescope.builtin").live_grep, opts)
+vim.keymap.set("n", "fs", require("telescope.builtin").grep_string, opts)
+vim.keymap.set("n", "fh", require("telescope.builtin").help_tags, opts)
+vim.keymap.set("n", "<space>q", function()
+	require("telescope.builtin").diagnostics({ bufnr = 0 }, opts)
+end)
+vim.keymap.set("n", "gi", require("telescope.builtin").lsp_implementations, opts)
 
-vim.keymap.set("n", "<space>gc", ":Telescope git_commits<CR>", opts)
-vim.keymap.set("n", "<space>gb", ":Telescope git_branches<CR>", opts)
-vim.keymap.set("n", "<space>gs", ":Telescope git_status<CR>", opts)
-
--- Fugitive
-vim.keymap.set("n", "<space>g", ":Git<CR>", opts)
-vim.keymap.set("n", "<space>ga", ":Git add %:p<CR><CR>", opts)
-vim.keymap.set("n", "<space>gg", ":GBrowse<CR>", opts)
-vim.keymap.set("n", "<space>gd", ":Gdiffsplit<CR>", opts)
-vim.keymap.set("n", "<space>go", ":Git checkout<Space>", opts)
+-- LSPsaga
+vim.keymap.set("n", "[d", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
+vim.keymap.set("n", "]d", "<Cmd>Lspsaga diagnostic_jump_next<CR>", opts)
+vim.keymap.set("n", "K", "<Cmd>Lspsaga hover_doc<CR>", opts)
+vim.keymap.set("n", "gd", "<Cmd>Lspsaga lsp_finder<CR>", opts)
+vim.keymap.set("i", "<C-k>", "<Cmd>Lspsaga signature_help<CR>", opts)
+vim.keymap.set("n", "gp", "<Cmd>Lspsaga peek_definition<CR>", opts)
+vim.keymap.set("n", "gr", "<Cmd>Lspsaga rename<CR>", opts)
+vim.keymap.set("n", "<space>e", "<Cmd>Lspsaga show_line_diagnostics<CR>", opts)
+vim.keymap.set({ "n", "v" }, "ga", "<cmd>Lspsaga code_action<CR>", opts)
 
 -- NvimTree
 vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", opts)
@@ -76,9 +70,9 @@ vim.keymap.set("n", "<space>sl", ":ToggleTermSendCurrentLine 2<CR>", opts)
 vim.keymap.set("v", "<space>sl", ":ToggleTermSendVisualLines 2<CR>", opts)
 
 -- DAP
-vim.keymap.set("n", "<space>db", require("dap").continue, opts)
-vim.keymap.set("n", "<space>dc", require("dap").close, opts)
-vim.keymap.set("n", "<space>dq", require("dapui").toggle, opts)
-vim.keymap.set("n", "<space>b", require("dap").toggle_breakpoint, opts)
-vim.keymap.set("n", "<space>n", require("dap").step_over, opts)
-vim.keymap.set("n", "<space>i", require("dap").step_into, opts)
+-- vim.keymap.set("n", "<space>db", require("dap").continue, opts)
+-- vim.keymap.set("n", "<space>dc", require("dap").close, opts)
+-- vim.keymap.set("n", "<space>dq", require("dapui").toggle, opts)
+-- vim.keymap.set("n", "<space>b", require("dap").toggle_breakpoint, opts)
+-- vim.keymap.set("n", "<space>n", require("dap").step_over, opts)
+-- vim.keymap.set("n", "<space>i", require("dap").step_into, opts)
