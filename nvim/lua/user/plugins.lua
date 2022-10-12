@@ -40,8 +40,8 @@ packer.startup({
 		use("williamboman/mason.nvim")
 		use("williamboman/mason-lspconfig.nvim")
 		use("jose-elias-alvarez/null-ls.nvim")
-		-- use("williamboman/nvim-lsp-installer")
 		use("j-hui/fidget.nvim")
+		use("glepnir/lspsaga.nvim")
 
 		--  cmp
 		use("hrsh7th/cmp-nvim-lsp")
@@ -75,10 +75,9 @@ packer.startup({
 		use("lukas-reineke/indent-blankline.nvim")
 		use("RRethy/vim-illuminate")
 		use("karb94/neoscroll.nvim")
+		use("norcalli/nvim-colorizer.lua")
 
 		--  git
-		use("tpope/vim-fugitive")
-		use("tpope/vim-rhubarb")
 		use("lewis6991/gitsigns.nvim")
 
 		-- Debug Adapter Protocol
