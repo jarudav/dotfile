@@ -65,13 +65,6 @@ cmp.setup({
 		format = lspkind.cmp_format({
 			mode = "symbol_text",
 			maxwidth = 50,
-			menu = {
-				buffer = "[Buffer]",
-				nvim_lsp = "[LSP]",
-				nvim_lua = "[Lua]",
-				path = "[Path]",
-				luasnip = "[LuaSnip]",
-			},
 		}),
 	},
 	experimental = {
