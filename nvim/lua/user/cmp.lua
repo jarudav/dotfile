@@ -63,7 +63,7 @@ cmp.setup({
 	formatting = {
 		-- fields = { "kind", "abbr", "menu" },
 		format = lspkind.cmp_format({
-			mode = "symbol_text",
+			mode = "symbol",
 			maxwidth = 50,
 		}),
 	},
