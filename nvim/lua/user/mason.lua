@@ -8,16 +8,8 @@ if not status2 then
 	return
 end
 
-mason.setup({
-	ui = {
-		icons = {
-			server_installed = "✓",
-			server_pending = "➜",
-			server_uninstalled = "✗",
-		},
-	},
-})
+mason.setup({})
 
 lspconfig.setup({
-	ensure_installed = { "pyright", "sumneko_lua" },
+	automatic_installation = true,
 })
