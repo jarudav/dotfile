@@ -33,7 +33,10 @@ packer.startup({
 		use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
 		--  colorschemes
-		use("folke/tokyonight.nvim")
+		use({
+			"svrana/neosolarized.nvim",
+			requires = { "tjdevries/colorbuddy.nvim" },
+		})
 
 		--  lsp
 		use("neovim/nvim-lspconfig")
