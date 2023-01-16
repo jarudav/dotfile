@@ -31,16 +31,16 @@ alias nvc 'cd $HOME/.config/nvim'
 alias fc '$EDITOR $HOME/.config/fish/config.fish'
 alias tc '$EDITOR $HOME/.config/tmux/tmux.conf'
 alias sc '$EDITOR $HOME/.config/starship/starship.toml'
-alias tl 'tmux ls'
-function ta
-    tmux attach-session -t $argv
-end
-function ts
-    tmux new -s $argv
-end
-function tk
-    tmux kill-session -t $argv
-end
+# alias tl 'tmux ls'
+# function ta
+#     tmux attach-session -t $argv
+# end
+# function ts
+#     tmux new -s $argv
+# end
+# function tk
+#     tmux kill-session -t $argv
+# end
 
 # }}}
 
@@ -79,13 +79,22 @@ end
 # =============================================================================
 # pyenv {{{
 # =============================================================================
-set -g PYENV $HOME/.pyenv
-set -gx PATH $PYENV/bin $PATH
+# set -g PYENV $HOME/.pyenv
+# set -gx PATH $PYENV/bin $PATH
 
-pyenv init - | source
+# pyenv init - | source
 
 # }}}
 
+# =============================================================================
+# conda {{{
+# =============================================================================
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" hook $argv | source
+# <<< conda initialize <<<
+
+# }}}
 
 # =============================================================================
 # starship prompt {{{
