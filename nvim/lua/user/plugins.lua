@@ -4,7 +4,18 @@ if not status_ok then
 	return
 end
 
-vim.cmd([[packadd packer.nvim]])
+local ensure_packer = function()
+	local fn = vim.fn
+	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+	if fn.empty(fn.glob(install_path)) > 0 then
+		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+		vim.cmd([[packadd packer.nvim]])
+		return true
+	end
+	return false
+end
+
+local packer_bootstrap = ensure_packer()
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.cmd([[
@@ -20,22 +31,22 @@ packer.startup({
 		use("wbthomason/packer.nvim")
 
 		use("nvim-lua/popup.nvim")
-		use("nvim-lua/plenary.nvim")
-
-		--  file explorer
-		use("kyazdani42/nvim-tree.lua")
-
-		--  terminal
-		use("akinsho/toggleterm.nvim")
 
 		--  telescope
-		use("nvim-telescope/telescope.nvim")
+		use({
+			"nvim-telescope/telescope.nvim",
+			tag = "0.1.0",
+			requires = { { "nvim-lua/plenary.nvim" } },
+		})
 		use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
-		--  colorschemes
+		--  file explorer
 		use({
-			"svrana/neosolarized.nvim",
-			requires = { "tjdevries/colorbuddy.nvim" },
+			"nvim-tree/nvim-tree.lua",
+			requires = {
+				"nvim-tree/nvim-web-devicons", -- optional, for file icons
+			},
+			tag = "nightly", -- optional, updated every week. (see issue #1193)
 		})
 
 		--  lsp
@@ -66,6 +77,21 @@ packer.startup({
 		})
 		use("nvim-treesitter/nvim-treesitter-textobjects")
 
+		--  terminal
+		use({
+			"akinsho/toggleterm.nvim",
+			tag = "*",
+			config = function()
+				require("toggleterm").setup()
+			end,
+		})
+
+		--  colorschemes
+		use({
+			"svrana/neosolarized.nvim",
+			requires = { "tjdevries/colorbuddy.nvim" },
+		})
+
 		--  utils
 		use("windwp/nvim-autopairs")
 		use("numToStr/Comment.nvim")
@@ -74,7 +100,6 @@ packer.startup({
 		--  UI
 		use("akinsho/bufferline.nvim")
 		use("nvim-lualine/lualine.nvim")
-		use("kyazdani42/nvim-web-devicons")
 		use("lukas-reineke/indent-blankline.nvim")
 		use("RRethy/vim-illuminate")
 		use("karb94/neoscroll.nvim")
@@ -86,6 +111,10 @@ packer.startup({
 		-- Debug Adapter Protocol
 		use("mfussenegger/nvim-dap")
 		use("mfussenegger/nvim-dap-python")
+
+		if packer_bootstrap then
+			require("packer").sync()
+		end
 		use("rcarriga/nvim-dap-ui")
 	end,
 	config = {
