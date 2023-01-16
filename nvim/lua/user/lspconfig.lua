@@ -18,7 +18,6 @@ local on_attach = function(client, bufnr)
 	--Mappings.
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
 	vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, bufopts)
-	-- vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
 end
 
 local handlers = {
