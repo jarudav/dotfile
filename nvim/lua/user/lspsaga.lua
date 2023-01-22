@@ -3,6 +3,4 @@ if not status then
 	return
 end
 
-saga.setup({
-	rename = { whole_project = false },
-})
+saga.setup({})
