@@ -72,11 +72,3 @@ keymap("n", "<space>\\", "<cmd>lua _VERTICAL_TOGGLE()<CR>", opts)
 keymap("n", "<space>kt", "<cmd>4ToggleTerm<CR>", opts)
 keymap("n", "<space>sl", ":ToggleTermSendCurrentLine 2<CR>", opts)
 keymap("v", "<space>sl", ":ToggleTermSendVisualLines 2<CR>", opts)
-
--- DAP
--- keymap("n", "<space>db", require("dap").continue, opts)
--- keymap("n", "<space>dc", require("dap").close, opts)
--- keymap("n", "<space>dq", require("dapui").toggle, opts)
--- keymap("n", "<space>b", require("dap").toggle_breakpoint, opts)
--- keymap("n", "<space>n", require("dap").step_over, opts)
--- keymap("n", "<space>i", require("dap").step_into, opts)

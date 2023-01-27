@@ -107,14 +107,9 @@ packer.startup({
 		--  git
 		use("lewis6991/gitsigns.nvim")
 
-		-- Debug Adapter Protocol
-		use("mfussenegger/nvim-dap")
-		use("mfussenegger/nvim-dap-python")
-
 		if packer_bootstrap then
 			require("packer").sync()
 		end
-		use("rcarriga/nvim-dap-ui")
 	end,
 	config = {
 		display = {
