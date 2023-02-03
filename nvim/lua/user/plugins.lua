@@ -65,9 +65,7 @@ packer.startup({
 		use("onsails/lspkind-nvim")
 
 		--  snippets
-		use("saadparwaiz1/cmp_luasnip")
 		use("L3MON4D3/LuaSnip")
-		use("rafamadriz/friendly-snippets")
 
 		--  treesitter
 		use({
