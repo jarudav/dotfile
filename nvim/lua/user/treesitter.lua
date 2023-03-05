@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 configs.setup({
-	ensure_installed = { "fish", "json", "html", "lua", "markdown", "python", "vim", "yaml" },
+	ensure_installed = { "fish", "json", "html", "lua", "markdown", "markdown_inline", "python", "vim", "yaml" },
 	sync_install = false,
 	highlight = {
 		enable = true,
