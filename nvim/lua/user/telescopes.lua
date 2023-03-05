@@ -3,15 +3,15 @@ if not status_ok then
 	return
 end
 
-local status, actions = pcall(require, "telescope.actions")
-if not status then
-	return
-end
+local actions = require("telescope.actions")
+local fb_actions = require("telescope").extensions.file_browser.actions
 
 telescope.setup({
 	defaults = {
 		path_display = { "smart" },
-		file_ignore_patterns = { "%.pyc" },
+		file_ignore_patterns = { "__pycache__", "%.pyc", "*.DS_Store" },
+		layout_config = { prompt_position = "top" },
+		sorting_strategy = "ascending",
 		mappings = {
 			i = {
 				["<C-j>"] = actions.move_selection_next,
@@ -25,13 +25,30 @@ telescope.setup({
 		},
 	},
 	extensions = {
-		fzf = {
-			fuzzy = true, -- false will only do exact matching
-			override_generic_sorter = true, -- override the generic sorter
-			override_file_sorter = true, -- override the file sorter
-			case_mode = "smart_case",
+		fzf = {},
+		file_browser = {
+			-- theme = "dropdown",
+			initial_mode = "normal",
+			path = "%:p:h",
+			grouped = true,
+			-- disables netrw and use telescope-file-browser in its place
+			hijack_netrw = true,
+			mappings = {
+				["i"] = {
+					-- your custom insert mode mappings
+					["<C-d>"] = fb_actions.remove,
+					["<C-r>"] = fb_actions.rename,
+					["<C-y>"] = fb_actions.copy,
+				},
+				["n"] = {
+					["h"] = fb_actions.goto_home_dir,
+					["p"] = fb_actions.goto_parent_dir,
+					-- your custom normal mode mappings
+				},
+			},
 		},
 	},
 })
 
 telescope.load_extension("fzf")
+telescope.load_extension("file_browser")
