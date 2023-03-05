@@ -35,19 +35,11 @@ packer.startup({
 		--  telescope
 		use({
 			"nvim-telescope/telescope.nvim",
-			tag = "0.1.0",
+			branch = "0.1.x",
 			requires = { { "nvim-lua/plenary.nvim" } },
 		})
 		use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-
-		--  file explorer
-		use({
-			"nvim-tree/nvim-tree.lua",
-			requires = {
-				"nvim-tree/nvim-web-devicons", -- optional, for file icons
-			},
-			tag = "nightly", -- optional, updated every week. (see issue #1193)
-		})
+		use({ "nvim-telescope/telescope-file-browser.nvim" })
 
 		--  lsp
 		use("neovim/nvim-lspconfig")
@@ -95,6 +87,7 @@ packer.startup({
 		use("tpope/vim-surround")
 
 		--  UI
+		use("nvim-tree/nvim-web-devicons")
 		use("akinsho/bufferline.nvim")
 		use("nvim-lualine/lualine.nvim")
 		use("lukas-reineke/indent-blankline.nvim")
