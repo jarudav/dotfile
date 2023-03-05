@@ -10,7 +10,7 @@ end
 
 local servers = {
 	"pyright",
-	"sumneko_lua",
+	"lua_ls",
 }
 
 local on_attach = function(client, bufnr)
