@@ -31,7 +31,6 @@ local options = {
 	timeoutlen = 500,
 	undofile = true,
 	updatetime = 300,
-	wildignore = { "__pycache__", "*.pyc" },
 	wildoptions = "pum",
 	wrap = false,
 }
