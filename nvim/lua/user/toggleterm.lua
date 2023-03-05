@@ -43,8 +43,3 @@ local lazygit = Terminal:new({ cmd = "lazygit", count = 3, hidden = true, direct
 function _LAZYGIT_TOGGLE()
 	lazygit:toggle()
 end
-
-local vertical_term = Terminal:new({ count = 4, hidden = true, direction = "vertical" })
-function _VERTICAL_TOGGLE()
-	vertical_term:toggle()
-end
