@@ -1,6 +1,7 @@
-.DS_Store
+*.DS_Store
+
+/nvim/lazy-lock.json
 .mono/
-zsh/
-iterm2/
-nvim/plugin/
-fish/fish_variables
+/zsh/
+/iterm2/
+!/fish/*.fish
