@@ -86,12 +86,12 @@ return {
 							end,
 						},
 						["n"] = {
-							["h"] = function(...)
-								return require("telescope").extensions.file_browser.actions.goto_home_dir(...)
-							end,
-							["p"] = function(...)
-								return require("telescope").extensions.file_browser.actions.goto_parent_dir(...)
-							end,
+							-- ["h"] = function(...)
+							-- 	return require("telescope").extensions.file_browser.actions.goto_home_dir(...)
+							-- end,
+							-- ["p"] = function(...)
+							-- 	return require("telescope").extensions.file_browser.actions.goto_parent_dir(...)
+							-- end,
 						},
 					},
 				},
