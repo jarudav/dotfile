@@ -95,6 +95,7 @@ return {
 					nls.builtins.formatting.stylua,
 					nls.builtins.formatting.black,
 					nls.builtins.formatting.isort,
+					nls.builtins.formatting.prettier,
 				},
 				on_attach = function(client, bufnr)
 					if client.supports_method("textDocument/formatting") then
