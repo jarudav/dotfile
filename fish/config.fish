@@ -45,7 +45,7 @@ alias sc '$EDITOR $HOME/.config/starship/starship.toml'
 # set -g PYENV $HOME/.pyenv
 # set -gx PATH $PYENV/bin $PATH
 
-# pyenv init - | source
+pyenv init - | source
 
 # }}}
 
@@ -54,7 +54,9 @@ alias sc '$EDITOR $HOME/.config/starship/starship.toml'
 # =============================================================================
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" hook $argv | source
+if test -f /Users/jarudatevorasee/.pyenv/versions/miniforge3-latest/bin/conda
+    eval /Users/jarudatevorasee/.pyenv/versions/miniforge3-latest/bin/conda "shell.fish" hook $argv | source
+end
 # <<< conda initialize <<<
 
 # }}}
