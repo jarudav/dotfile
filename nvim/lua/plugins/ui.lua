@@ -274,6 +274,7 @@ return {
     main = "ibl",
     opts = {
       indent = { char = "┊" },
+      scope = { enabled = false },
     },
   },
 
