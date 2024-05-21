@@ -25,9 +25,13 @@ return {
   {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
+    dependencies = "nvim-tree/nvim-web-devicons",
     keys = {
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>",            desc = "Toggle pin" },
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
+      { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>",          desc = "Delete Other Buffers" },
+      { "<leader>br", "<Cmd>BufferLineCloseRight<CR>",           desc = "Delete Buffers to the Right" },
+      { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>",            desc = "Delete Buffers to the Left" },
       { "[b",         "<cmd>BufferLineMovePrev<CR>",             desc = "Move previous buffer" },
       { "]b",         "<cmd>BufferLineMoveNext<CR>",             desc = "Move next buffer" },
       { "<S-l>",      "<cmd>BufferLineCycleNext<CR>",            desc = "Next buffer" },
@@ -41,7 +45,7 @@ return {
         diagnostics = "nvim_lsp",
       },
     },
-    version = "v3.*",
+    version = "*",
   },
 
   {
