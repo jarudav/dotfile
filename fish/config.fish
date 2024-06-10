@@ -18,10 +18,10 @@ fish_vi_key_bindings
 # =============================================================================
 alias vim '$EDITOR'
 function ls
-    exa --icons $argv
+    eza --icons $argv
 end
-alias ll 'ls --long --header'
-alias la 'ls --long --header --all'
+alias ll 'ls -l -g'
+alias la 'ls -l -g -a'
 
 alias ds 'cd $HOME/Documents/Projects'
 alias nvc 'cd $HOME/.config/nvim'
@@ -34,18 +34,10 @@ alias sc '$EDITOR $HOME/.config/starship/starship.toml'
 # =============================================================================
 # fzf
 # =============================================================================
-# set -gx FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border --ansi --preview-window=wrap --marker="*"'
-# set -gx FZF_DEFAULT_COMMAND 'fd --type file --color always --follow --hidden'
+set -g FZF_DEFAULT_COMMAND 'fd --type file --color=always --follow --hidden'
+set -g FZF_DEFAULT_OPTS "--height 40% --layout=reverse --border --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 
-# }}}
-
-# =============================================================================
-# pyenv {{{
-# =============================================================================
-# set -g PYENV $HOME/.pyenv
-# set -gx PATH $PYENV/bin $PATH
-
-pyenv init - | source
+fzf --fish | source
 
 # }}}
 

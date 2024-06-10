@@ -1,4 +1,7 @@
 return {
+  { "MunifTanjim/nui.nvim",        lazy = true },
+
+  -- icons
   {
     "rcarriga/nvim-notify",
     keys = {
