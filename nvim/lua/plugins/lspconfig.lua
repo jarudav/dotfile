@@ -6,7 +6,6 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      { "folke/neodev.nvim",    opts = {} },
       { "hrsh7th/cmp-nvim-lsp", dependencies = { "hrsh7th/nvim-cmp" } },
     },
     opts = {
@@ -43,8 +42,8 @@ return {
       end
       vim.diagnostic.config(opts.diagnostics)
 
-      vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-      vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+      -- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
+      -- vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
       vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -65,7 +64,6 @@ return {
         nmap("<leader>ca", vim.lsp.buf.code_action, "Code Action")
         nmap("K", vim.lsp.buf.hover, "Hover Documentation")
         imap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-        nmap("gD", vim.lsp.buf.declaration, "Goto Declaration")
       end
 
       require("mason").setup(opts.mason)

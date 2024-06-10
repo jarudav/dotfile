@@ -74,11 +74,13 @@ return {
   },
 
   {
-    "numToStr/Comment.nvim",
-    opts = {
-      -- add any options here
-    },
-    lazy = false,
+    "echasnovski/mini.bracketed",
+    version = "*",
+    event = "BufReadPost",
+    opts = {},
+    config = function(_, opts)
+      require("mini.bracketed").setup(opts)
+    end,
   },
 
   {

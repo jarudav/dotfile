@@ -2,53 +2,56 @@ return {
   { "MunifTanjim/nui.nvim",        lazy = true },
 
   -- icons
+  { "nvim-tree/nvim-web-devicons", lazy = true },
+
   {
-    "rcarriga/nvim-notify",
-    keys = {
-      {
-        "<leader>un",
-        function()
-          require("notify").dismiss({ silent = true, pending = true })
-        end,
-        desc = "Delete all Notifications",
-      },
-    },
-    opts = {
-      background_colour = "#000000",
-      timeout = 3000,
-      max_height = function()
-        return math.floor(vim.o.lines * 0.75)
-      end,
-      max_width = function()
-        return math.floor(vim.o.columns * 0.75)
-      end,
-    },
+    "echasnovski/mini.notify",
+    version = "*",
+    event = "VeryLazy",
+    opts = {},
+    config = function(_, opts)
+      require("mini.notify").setup(opts)
+    end,
   },
 
   {
-    "akinsho/bufferline.nvim",
-    event = "VeryLazy",
-    dependencies = "nvim-tree/nvim-web-devicons",
-    keys = {
-      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>",            desc = "Toggle pin" },
-      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
-      { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>",          desc = "Delete Other Buffers" },
-      { "<leader>br", "<Cmd>BufferLineCloseRight<CR>",           desc = "Delete Buffers to the Right" },
-      { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>",            desc = "Delete Buffers to the Left" },
-      { "[b",         "<cmd>BufferLineMovePrev<CR>",             desc = "Move previous buffer" },
-      { "]b",         "<cmd>BufferLineMoveNext<CR>",             desc = "Move next buffer" },
-      { "<S-l>",      "<cmd>BufferLineCycleNext<CR>",            desc = "Next buffer" },
-      { "<S-h>",      "<cmd>BufferLineCyclePrev<CR>",            desc = "Previous buffer" },
-    },
-    opts = {
-      options = {
-        always_show_bufferline = false,
-        show_close_icon = false,
-        show_buffer_close_icons = false,
-        diagnostics = "nvim_lsp",
-      },
-    },
+    "echasnovski/mini.animate",
     version = "*",
+    event = "VeryLazy",
+    opts = {},
+    config = function(_, opts)
+      require("mini.animate").setup(opts)
+    end,
+  },
+
+  {
+    "echasnovski/mini.tabline",
+    version = "*",
+    event = "VeryLazy",
+    opts = {},
+    config = function(_, opts)
+      require("mini.tabline").setup(opts)
+    end,
+  },
+
+  {
+    "echasnovski/mini.indentscope",
+    version = "*",
+    opts = {
+      symbol = "│",
+      options = { try_as_border = true },
+    },
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "help", "Trouble", "lazy", "mason", "notify" },
+        callback = function()
+          vim.b.miniindentscope_disable = true
+        end,
+      })
+    end,
+    config = function(_, opts)
+      require("mini.indentscope").setup(opts)
+    end,
   },
 
   {
@@ -233,7 +236,7 @@ return {
 
       ins_right({
         "diff",
-        symbols = { added = " ", modified = "柳 ", removed = " " },
+        symbols = { added = " ", modified = "󰝤 ", removed = " " },
         diff_color = {
           added = { fg = colors.green },
           modified = { fg = colors.orange },
@@ -252,37 +255,6 @@ return {
 
       return config
     end,
-  },
-
-  {
-    "echasnovski/mini.indentscope",
-    version = false,
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      symbol = "│",
-      options = { try_as_border = true },
-    },
-    init = function()
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
-        callback = function()
-          vim.b.miniindentscope_disable = true
-        end,
-      })
-    end,
-    config = function(_, opts)
-      require("mini.indentscope").setup(opts)
-    end,
-  },
-
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    main = "ibl",
-    opts = {
-      indent = { char = "┊" },
-      scope = { enabled = false },
-    },
   },
 
   {
@@ -360,8 +332,4 @@ return {
       },
     },
   },
-
-  { "nvim-tree/nvim-web-devicons", lazy = true },
-
-  { "MunifTanjim/nui.nvim",        lazy = true },
 }
