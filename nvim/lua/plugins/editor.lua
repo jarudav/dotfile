@@ -2,7 +2,7 @@ return {
 	{
 		"echasnovski/mini.diff",
 		version = false,
-		event = { "BufReadPre", "BufNewFile" },
+		event = "VeryLazy",
 		opts = {},
 		config = function(_, opts)
 			require("mini.diff").setup(opts)
@@ -10,39 +10,16 @@ return {
 	},
 
 	{
-		"echasnovski/mini.hipatterns",
-		version = "*",
-		event = "BufReadPre",
-		opts = function()
-			local hipatterns = require("mini.hipatterns")
-			return {
-				highlighters = {
-					-- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
-					fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
-					hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
-					todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
-					note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
-
-					-- Highlight hex color strings (`#rrggbb`) using that color
-					hex_color = hipatterns.gen_highlighter.hex_color(),
-				},
-			}
-		end,
+		"echasnovski/mini-git",
+		version = false,
+		main = "mini.git",
+		cmd = "Git",
+		opts = {},
 		config = function(_, opts)
-			require("mini.hipatterns").setup(opts)
+			require("mini.git").setup(opts)
 		end,
 	},
 
-	{
-		"echasnovski/mini.cursorword",
-		version = "*",
-		event = "BufReadPre",
-		config = function()
-			require("mini.cursorword").setup()
-		end,
-	},
-
-	-- buffer remove
 	{
 		"echasnovski/mini.bufremove",
 		keys = {
@@ -227,7 +204,7 @@ return {
 			{
 				";b",
 				function()
-					require("mini.pick").builtin.buffer()
+					require("mini.pick").builtin.buffers()
 				end,
 				desc = "Pick from buffers",
 			},
