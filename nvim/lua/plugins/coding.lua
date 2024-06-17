@@ -2,13 +2,11 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		version = false,
-		event = "InsertEnter",
+		event = { "InsertEnter" },
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
-			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-buffer",
 			"onsails/lspkind-nvim",
 		},
 		opts = function()
@@ -19,7 +17,7 @@ return {
 				},
 				snippet = {
 					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
+						vim.snippet.expand(args.body)
 					end,
 				},
 				mapping = cmp.mapping.preset.insert({
@@ -37,9 +35,10 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-					{ name = "buffer" },
+					{ name = "snippets" },
 					{ name = "path" },
+				}, {
+					{ name = "buffer" },
 				}),
 				formatting = {
 					format = require("lspkind").cmp_format({
@@ -49,13 +48,55 @@ return {
 				},
 			}
 		end,
+		config = function(_, opts)
+			local cmp = require("cmp")
+			cmp.setup(opts)
+		end,
+	},
+
+	{
+		"garymjr/nvim-snippets",
+		opts = {
+			friendly_snippets = true,
+		},
+		dependencies = { "rafamadriz/friendly-snippets" },
+		keys = {
+			{
+				"<Tab>",
+				function()
+					return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
+				end,
+				expr = true,
+				silent = true,
+				mode = { "i", "s" },
+			},
+			{
+				"<S-Tab>",
+				function()
+					return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<Tab>"
+				end,
+				expr = true,
+				silent = true,
+				mode = { "i", "s" },
+			},
+		},
 	},
 
 	{
 		"echasnovski/mini.pairs",
 		version = "*",
 		event = "InsertEnter",
-		opts = {},
+		opts = {
+			-- skip autopair when next character is one of these
+			skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+			-- skip autopair when the cursor is inside these treesitter nodes
+			skip_ts = { "string" },
+			-- skip autopair when next character is closing pair
+			-- and there are more closing pairs than opening pairs
+			skip_unbalanced = true,
+			-- better deal with markdown code blocks
+			markdown = true,
+		},
 		config = function(_, opts)
 			require("mini.pairs").setup(opts)
 		end,
@@ -74,8 +115,13 @@ return {
 	{
 		"echasnovski/mini.bracketed",
 		version = "*",
-		event = "BufReadPost",
-		opts = {},
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+		opts = {
+			comment = { suffix = "" },
+			conflict = { suffix = "" },
+			diagnostic = { suffix = "" },
+			file = { suffix = "" },
+		},
 		config = function(_, opts)
 			require("mini.bracketed").setup(opts)
 		end,
@@ -85,7 +131,7 @@ return {
 		"smjonas/inc-rename.nvim",
 		keys = {
 			{
-				"<leader>rn",
+				"grn",
 				function()
 					return ":IncRename " .. vim.fn.expand("<cword>")
 				end,
@@ -95,6 +141,27 @@ return {
 		},
 		config = function()
 			require("inc_rename").setup()
+		end,
+	},
+
+	{
+		"ThePrimeagen/refactoring.nvim",
+		keys = {
+			{
+				"grr",
+				function()
+					require("refactoring").select_refactor()
+				end,
+				mode = { "n", "x" },
+				noremap = true,
+				silent = true,
+				expr = false,
+				desc = "Refactor",
+			},
+		},
+		opts = { show_success_message = true },
+		config = function(_, opts)
+			require("refactoring").setup(opts)
 		end,
 	},
 }
