@@ -15,7 +15,7 @@ opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true -- Ignore case
 opt.inccommand = "nosplit" -- preview incremental substitute
-opt.laststatus = 0
+opt.laststatus = 3
 opt.list = true -- Show some invisible characters (tabs...
 opt.mouse = "a" -- Enable mouse mode
 opt.number = true -- Print line number
@@ -39,7 +39,7 @@ opt.splitkeep = "screen"
 opt.splitright = true -- Put new windows right of current
 opt.tabstop = 2 -- Number of spaces tabs count for
 opt.termguicolors = true -- True color support
-opt.timeoutlen = 1000
+-- opt.timeoutlen = 1000
 opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 200 -- Save swap file and trigger CursorHold
@@ -147,6 +147,12 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 		local file = vim.loop.fs_realpath(event.match) or event.match
 		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
 	end,
+})
+
+-- Turn off paste mode when leaving insert
+vim.api.nvim_create_autocmd("InsertLeave", {
+	pattern = "*",
+	command = "set nopaste",
 })
 
 local opts = { noremap = true, silent = true }
