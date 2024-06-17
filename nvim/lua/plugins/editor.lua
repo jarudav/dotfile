@@ -2,7 +2,16 @@ return {
 	{
 		"echasnovski/mini.diff",
 		version = false,
-		event = "VeryLazy",
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+		keys = {
+			{
+				";Gd",
+				function()
+					require("mini.diff").toggle_overlay(0)
+				end,
+				desc = "Toggle mini.diff overlay",
+			},
+		},
 		opts = {},
 		config = function(_, opts)
 			require("mini.diff").setup(opts)
@@ -13,7 +22,7 @@ return {
 		"echasnovski/mini-git",
 		version = false,
 		main = "mini.git",
-		cmd = "Git",
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		opts = {},
 		config = function(_, opts)
 			require("mini.git").setup(opts)
@@ -24,14 +33,14 @@ return {
 		"echasnovski/mini.bufremove",
 		keys = {
 			{
-				"<leader>bd",
+				";bd",
 				function()
 					require("mini.bufremove").delete(0, false)
 				end,
 				desc = "Delete Buffer",
 			},
 			{
-				"<leader>bD",
+				";bD",
 				function()
 					require("mini.bufremove").delete(0, true)
 				end,
@@ -102,59 +111,6 @@ return {
 	},
 
 	{
-		"folke/trouble.nvim",
-		cmd = "Trouble",
-		keys = {
-			{
-				"gd",
-				"<cmd>Trouble lsp_definitions toggle focus=true<cr>",
-				desc = "LSP Definitions (Trouble)",
-			},
-			{
-				"gD",
-				"<cmd>Trouble lsp_declarations toggle focus=true<cr>",
-				desc = "LSP Declarations (Trouble)",
-			},
-			{
-				"gr",
-				"<cmd>Trouble lsp_references toggle focus=true<cr>",
-				desc = "LSP References (Trouble)",
-			},
-			{
-				";D",
-				"<cmd>Trouble diagnostics toggle<cr>",
-				desc = "Diagnostics (Trouble)",
-			},
-			{
-				";d",
-				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-				desc = "Buffer Diagnostics (Trouble)",
-			},
-			{
-				";s",
-				"<cmd>Trouble symbols toggle focus=false<cr>",
-				desc = "Symbols (Trouble)",
-			},
-			{
-				";l",
-				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-				desc = "LSP Definitions / references / ... (Trouble)",
-			},
-			{
-				";q",
-				"<cmd>Trouble loclist toggle<cr>",
-				desc = "Location List (Trouble)",
-			},
-			{
-				";Q",
-				"<cmd>Trouble qflist toggle<cr>",
-				desc = "Quickfix List (Trouble)",
-			},
-		},
-		opts = {}, -- for default options, refer to the configuration section for custom setup.
-	},
-
-	{
 		"echasnovski/mini.pick",
 		version = "*",
 		keys = {
@@ -202,7 +158,14 @@ return {
 				desc = "Pick from pattern matches with live feedback",
 			},
 			{
-				";b",
+				";h",
+				function()
+					require("mini.pick").builtin.help()
+				end,
+				desc = "Pick from help tags",
+			},
+			{
+				";;",
 				function()
 					require("mini.pick").builtin.buffers()
 				end,
@@ -216,9 +179,125 @@ return {
 				desc = "Resume latest picker",
 			},
 		},
-		opts = {},
+		opts = {
+			mappings = {
+				move_down = "<C-j>",
+				move_up = "<C-k>",
+			},
+		},
 		config = function(_, opts)
 			require("mini.pick").setup(opts)
 		end,
+	},
+
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+		end,
+		opts = {},
+		config = function(_, opts)
+			local wk = require("which-key")
+			wk.setup(opts)
+		end,
+	},
+
+	{
+		"folke/flash.nvim",
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+		---@type Flash.Config
+		opts = {},
+    -- stylua: ignore
+    keys = {
+      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+    },
+	},
+
+	{
+		"folke/todo-comments.nvim",
+		cmd = { "TodoTrouble", "TodoTelescope" },
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+		opts = {},
+		keys = {
+			{
+				"]x",
+				function()
+					require("todo-comments").jump_next()
+				end,
+				desc = "Next Todo Comment",
+			},
+			{
+				"[x",
+				function()
+					require("todo-comments").jump_prev()
+				end,
+				desc = "Previous Todo Comment",
+			},
+			{ ";t", "<cmd>Trouble todo toggle<cr>", desc = "Todo (Trouble)" },
+			{
+				";T",
+				"<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>",
+				desc = "Todo/Fix/Fixme (Trouble)",
+			},
+		},
+	},
+
+	{
+		"folke/trouble.nvim",
+		opts = {}, -- for default options, refer to the configuration section for custom setup.
+		cmd = "Trouble",
+		keys = {
+			{
+				"gd",
+				"<cmd>Trouble lsp_definitions toggle focus=true<cr>",
+				desc = "LSP Definitions (Trouble)",
+			},
+			{
+				"gD",
+				"<cmd>Trouble lsp_declarations toggle focus=true<cr>",
+				desc = "LSP Declarations (Trouble)",
+			},
+			{
+				"gr",
+				"<cmd>Trouble lsp_references toggle focus=true<cr>",
+				desc = "LSP References (Trouble)",
+			},
+			{
+				";d",
+				"<cmd>Trouble diagnostics toggle  focus=true filter.buf=0<cr>",
+				desc = "Buffer Diagnostics (Trouble)",
+			},
+			{
+				";D",
+				"<cmd>Trouble diagnostics toggle focus=true<cr>",
+				desc = "Diagnostics (Trouble)",
+			},
+			{
+				";s",
+				"<cmd>Trouble symbols toggle focus=false<cr>",
+				desc = "Symbols (Trouble)",
+			},
+			{
+				";l",
+				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+				desc = "LSP Definitions / references / ... (Trouble)",
+			},
+			{
+				";q",
+				"<cmd>Trouble loclist toggle<cr>",
+				desc = "Location List (Trouble)",
+			},
+			{
+				";Q",
+				"<cmd>Trouble qflist toggle<cr>",
+				desc = "Quickfix List (Trouble)",
+			},
+		},
 	},
 }

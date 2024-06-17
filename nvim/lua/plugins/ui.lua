@@ -1,23 +1,11 @@
 return {
-  { "MunifTanjim/nui.nvim",        lazy = true },
-
   -- icons
   { "nvim-tree/nvim-web-devicons", lazy = true },
 
   {
-    "echasnovski/mini.notify",
-    version = "*",
-    event = "VeryLazy",
-    opts = {},
-    config = function(_, opts)
-      require("mini.notify").setup(opts)
-    end,
-  },
-
-  {
     "echasnovski/mini.animate",
     version = "*",
-    event = "VeryLazy",
+    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
     opts = {},
     config = function(_, opts)
       require("mini.animate").setup(opts)
@@ -27,7 +15,7 @@ return {
   {
     "echasnovski/mini.tabline",
     version = "*",
-    event = "VeryLazy",
+    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
     opts = {},
     config = function(_, opts)
       require("mini.tabline").setup(opts)
@@ -37,7 +25,7 @@ return {
   {
     "echasnovski/mini.indentscope",
     version = "*",
-    event = "BufReadPre",
+    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
     opts = {
       symbol = "│",
       options = { try_as_border = true },
@@ -58,7 +46,7 @@ return {
   {
     "echasnovski/mini.hipatterns",
     version = "*",
-    event = "BufReadPre",
+    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
     opts = function()
       local hipatterns = require("mini.hipatterns")
       return {
@@ -80,19 +68,11 @@ return {
   },
 
   {
-    "echasnovski/mini.cursorword",
-    version = "*",
-    event = "BufReadPre",
-    config = function()
-      require("mini.cursorword").setup()
-    end,
-  },
-
-  {
     "echasnovski/mini.statusline",
     version = "*",
-    event = "VeryLazy",
-    opts = {},
+    opts = {
+      set_vim_settings = false,
+    },
     config = function(_, opts)
       require("mini.statusline").setup(opts)
     end,
@@ -101,6 +81,10 @@ return {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
     opts = {
       lsp = {
         override = {
@@ -127,31 +111,31 @@ return {
         desc = "Redirect Cmdline",
       },
       {
-        "<leader>nl",
+        ";nl",
         function()
           require("noice").cmd("last")
         end,
         desc = "Noice Last Message",
       },
       {
-        "<leader>nh",
+        ";nh",
         function()
           require("noice").cmd("history")
         end,
         desc = "Noice History",
       },
       {
-        "<leader>na",
+        ";na",
         function()
           require("noice").cmd("all")
         end,
         desc = "Noice All",
       },
       {
-        "<c-f>",
+        "<C-f>",
         function()
           if not require("noice.lsp").scroll(4) then
-            return "<c-f>"
+            return "<C-f>"
           end
         end,
         silent = true,
@@ -160,10 +144,10 @@ return {
         mode = { "i", "n", "s" },
       },
       {
-        "<c-b>",
+        "<C-b>",
         function()
           if not require("noice.lsp").scroll(-4) then
-            return "<c-b>"
+            return "<C-b>"
           end
         end,
         silent = true,
