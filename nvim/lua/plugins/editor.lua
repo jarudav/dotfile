@@ -239,10 +239,10 @@ return {
 				end,
 				desc = "Previous Todo Comment",
 			},
-			{ ";t", "<cmd>Trouble todo toggle<cr>", desc = "Todo (Trouble)" },
+			{ ";t", "<cmd>Trouble todo toggle focus=true<cr>", desc = "Todo (Trouble)" },
 			{
 				";T",
-				"<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>",
+				"<cmd>Trouble todo toggle filter={tag={TODO,FIX,FIXME}} focus=true<cr>",
 				desc = "Todo/Fix/Fixme (Trouble)",
 			},
 		},
