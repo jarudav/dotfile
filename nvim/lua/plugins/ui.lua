@@ -1,6 +1,13 @@
 return {
-  -- icons
-  { "nvim-tree/nvim-web-devicons", lazy = true },
+  {
+    "echasnovski/mini.icons",
+    version = false,
+    lazy = true,
+    opts = {},
+    config = function(_, opts)
+      require("mini.icons").setup(opts)
+    end,
+  },
 
   {
     "echasnovski/mini.animate",
