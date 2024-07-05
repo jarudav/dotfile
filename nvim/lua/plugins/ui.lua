@@ -4,8 +4,8 @@ return {
     version = false,
     lazy = true,
     opts = {},
-    config = function(_, opts)
-      require("mini.icons").setup(opts)
+    init = function()
+      require("mini.icons").mock_nvim_web_devicons()
     end,
   },
 
