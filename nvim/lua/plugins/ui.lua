@@ -118,21 +118,21 @@ return {
         desc = "Redirect Cmdline",
       },
       {
-        ";nl",
+        "<leader>nl",
         function()
           require("noice").cmd("last")
         end,
         desc = "Noice Last Message",
       },
       {
-        ";nh",
+        "<leader>nh",
         function()
           require("noice").cmd("history")
         end,
         desc = "Noice History",
       },
       {
-        ";na",
+        "<leader>na",
         function()
           require("noice").cmd("all")
         end,
