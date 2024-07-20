@@ -42,15 +42,15 @@ fzf --fish | source
 # }}}
 
 # =============================================================================
-# conda {{{
+# pyenv {{{
 # =============================================================================
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-if test -f /Users/jarudatevorasee/.pyenv/versions/miniforge3-latest/bin/conda
-    eval /Users/jarudatevorasee/.pyenv/versions/miniforge3-latest/bin/conda "shell.fish" hook $argv | source
-end
-# <<< conda initialize <<<
+pyenv init - | source
+# }}}
 
+# =============================================================================
+# pipx {{{
+# =============================================================================
+set PATH $PATH $HOME/.local/bin
 # }}}
 
 # =============================================================================
