@@ -1,192 +1,238 @@
 return {
 	{
-		"echasnovski/mini.diff",
-		version = false,
-		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+		"ibhagwan/fzf-lua",
+		dependencies = {},
+		cmd = "FzfLua",
 		keys = {
-			{
-				"<leader>Gd",
-				function()
-					require("mini.diff").toggle_overlay(0)
-				end,
-				desc = "Toggle mini.diff overlay",
-			},
-		},
-		opts = {},
-		config = function(_, opts)
-			require("mini.diff").setup(opts)
-		end,
-	},
-
-	{
-		"echasnovski/mini-git",
-		version = false,
-		main = "mini.git",
-		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-		opts = {},
-		config = function(_, opts)
-			require("mini.git").setup(opts)
-		end,
-	},
-
-	{
-		"echasnovski/mini.bufremove",
-		keys = {
-			{
-				"<leader>bd",
-				function()
-					require("mini.bufremove").delete(0, false)
-				end,
-				desc = "Delete Buffer",
-			},
-			{
-				"<leader>bD",
-				function()
-					require("mini.bufremove").delete(0, true)
-				end,
-				desc = "Delete Buffer (Force)",
-			},
-		},
-	},
-
-	{
-		"echasnovski/mini.files",
-		version = "*",
-		keys = {
-			{
-				"<leader>e",
-				function()
-					local minifiles = require("mini.files")
-					local minifiles_toggle = function(...)
-						if not minifiles.close() then
-							minifiles.open(...)
-						end
-					end
-					minifiles_toggle()
-				end,
-				desc = "Open MiniFiles",
-			},
-		},
-		opts = {
-			mappings = {
-				toggle_hidden = "g.",
-			},
-			content = {
-				filter = function(entry)
-					return entry.name ~= ".DS_Store" and entry.name ~= ".git" and entry.name ~= "__pycache__"
-				end,
-			},
-		},
-		config = function(_, opts)
-			require("mini.files").setup(opts)
-
-			local show_dotfiles = true
-			local filter_show = function(fs_entry)
-				return true
-			end
-
-			local filter_hide = function(fs_entry)
-				return not vim.startswith(fs_entry.name, ".")
-			end
-
-			local toggle_dotfiles = function()
-				show_dotfiles = not show_dotfiles
-				local new_filter = show_dotfiles and filter_show or filter_hide
-				require("mini.files").refresh({ content = { filter = new_filter } })
-			end
-
-			vim.api.nvim_create_autocmd("User", {
-				pattern = "MiniFilesBufferCreate",
-				callback = function(args)
-					local buf_id = args.data.buf_id
-					vim.keymap.set(
-						"n",
-						opts.mappings.toggle_hidden,
-						toggle_dotfiles,
-						{ buffer = buf_id, desc = "MiniFiles Toggle dotfile" }
-					)
-				end,
-			})
-		end,
-	},
-
-	{
-		"echasnovski/mini.pick",
-		version = "*",
-		keys = {
-			{
-				"<leader>F",
-				function()
-					require("mini.pick").builtin.files()
-				end,
-				desc = "Pick from files",
-			},
-			{
-				"<leader>f",
-				function()
-					require("mini.pick").builtin.cli({
-						command = {
-							"rg",
-							"--files",
-							"--glob",
-							"*.{py,csv,css,html,json,xml,fish,lua,js}",
-						},
-					}, {
-						source = {
-							name = "Files (rg)",
-							show = function(buf_id, items, query)
-								require("mini.pick").default_show(buf_id, items, query, { show_icons = true })
-							end,
-							choose = vim.schedule_wrap(require("mini.pick").default_choose),
-						},
-					})
-				end,
-				desc = "Pick from files (cli)",
-			},
-			{
-				"<leader>w",
-				function()
-					require("mini.pick").builtin.grep()
-				end,
-				desc = "Pick from pattern matches",
-			},
-			{
-				"<leader>g",
-				function()
-					require("mini.pick").builtin.grep_live()
-				end,
-				desc = "Pick from pattern matches with live feedback",
-			},
-			{
-				"<leader>h",
-				function()
-					require("mini.pick").builtin.help()
-				end,
-				desc = "Pick from help tags",
-			},
 			{
 				"<leader><leader>",
 				function()
-					require("mini.pick").builtin.buffers()
+					require("fzf-lua").buffers({ sort_mru = true, sort_lastused = true })
 				end,
-				desc = "Pick from buffers",
+				desc = "Fzf Switch Buffer",
 			},
 			{
-				"<leader>r",
+				"<leader>ff",
 				function()
-					require("mini.pick").builtin.resume()
+					require("fzf-lua").files()
 				end,
-				desc = "Resume latest picker",
+				desc = "Fzf Files",
+			},
+			{
+				"<leader>fF",
+				function()
+					require("fzf-lua").files({ cwd = "%:p:h" })
+				end,
+				desc = "Fzf Files (cwd)",
+			},
+			{
+				"<leader>fg",
+				function()
+					require("fzf-lua").git_files()
+				end,
+				desc = "Fzf Files (git-files)",
+			},
+			{
+				"<leader>gc",
+				function()
+					require("fzf-lua").git_commits()
+				end,
+				desc = "Fzf Commits",
+			},
+			{
+				"<leader>gs",
+				function()
+					require("fzf-lua").git_status()
+				end,
+				desc = "Fzf Status",
+			},
+			{
+				"<leader>sg",
+				function()
+					require("fzf-lua").live_grep_native()
+				end,
+				desc = "Fzf Live Grep",
+			},
+			{
+				"<leader>sw",
+				function()
+					require("fzf-lua").grep_cword()
+				end,
+				desc = "Fzf Grep word",
+			},
+			{
+				"<leader>/",
+				function()
+					require("fzf-lua").lgrep_curbuf()
+				end,
+				desc = "Fzf Live Grep Current Buffer",
+			},
+			{
+				"<leader>sj",
+				function()
+					require("fzf-lua").jumps()
+				end,
+				desc = "Fzf Jumps List",
+			},
+			{
+				"<leader>sk",
+				function()
+					require("fzf-lua").keys()
+				end,
+				desc = "Fzf Key Maps",
+			},
+			{
+				"<leader>sb",
+				function()
+					require("fzf-lua").builtin()
+				end,
+				desc = "Fzf Files (git-files)",
+			},
+			-- lsp
+			{
+				"gd",
+				function()
+					require("fzf-lua").lsp_definitions({ jump_to_single_result = true, ignore_current_line = true })
+				end,
+				desc = "Fzf Goto Definition",
+			},
+			{
+				"gr",
+				function()
+					require("fzf-lua").lsp_references({
+						jump_to_single_result = true,
+						ignore_current_line = true,
+						includeDeclaration = false,
+					})
+				end,
+				desc = "Fzf Goto Definition",
+			},
+			{
+				"<leader>d",
+				function()
+					require("fzf-lua").lsp_document_diagnostics()
+				end,
+				desc = "Fzf Document Diagnostics",
+			},
+			{
+				"<leader>D",
+				function()
+					require("fzf-lua").lsp_workspace_diagnostics()
+				end,
+				desc = "Fzf Workspace Diagnostics",
+			},
+			{
+				"<leader>ss",
+				function()
+					require("fzf-lua").lsp_document_symbols({})
+				end,
+				desc = "Goto Symbol",
+			},
+			{
+				"<leader>sS",
+				function()
+					require("fzf-lua").lsp_live_workspace_symbols({})
+				end,
+				desc = "Goto Symbol (Workspace)",
 			},
 		},
 		opts = {
-			mappings = {
-				move_down = "<C-j>",
-				move_up = "<C-k>",
+			"max-perf",
+			file_ignore_patterns = {
+				"%.DS_Store$",
+				"__pycache__",
+				"%.docx",
+				"%.h5",
+				"%.hdf5",
+				"%.ipynb",
+				"%.jpg",
+				"%.pdf",
+				"%.png",
+				"%.pt",
+				"%.pth",
+				"%.zip",
+			},
+			winopts = {
+				preview = { default = "bat_native" },
+			},
+			keymap = {
+				builtin = {
+					["<c-f>"] = "preview-page-down",
+					["<c-b>"] = "preview-page-up",
+				},
+				fzf = {
+					["ctrl-d"] = "half-page-down",
+					["ctrl-u"] = "half-page-up",
+					["ctrl-f"] = "preview-page-down",
+					["ctrl-b"] = "preview-page-up",
+				},
 			},
 		},
 		config = function(_, opts)
-			require("mini.pick").setup(opts)
+			require("fzf-lua").setup(opts)
+		end,
+	},
+
+	{
+		"lewis6991/gitsigns.nvim",
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+		opts = {
+			signs = {
+				add = { text = "▎" },
+				change = { text = "▎" },
+				delete = { text = "" },
+				topdelete = { text = "" },
+				changedelete = { text = "▎" },
+				untracked = { text = "▎" },
+			},
+			signs_staged = {
+				add = { text = "▎" },
+				change = { text = "▎" },
+				delete = { text = "" },
+				topdelete = { text = "" },
+				changedelete = { text = "▎" },
+				untracked = { text = "▎" },
+			},
+			on_attach = function(buffer)
+				local gs = package.loaded.gitsigns
+
+				local function map(mode, l, r, desc)
+					vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
+				end
+
+				map("n", "]h", function()
+					if vim.wo.diff then
+						vim.cmd.normal({ "]c", bang = true })
+					else
+						gs.nav_hunk("next")
+					end
+				end, "Next Hunk")
+
+				map("n", "[h", function()
+					if vim.wo.diff then
+						vim.cmd.normal({ "[c", bang = true })
+					else
+						gs.nav_hunk("prev")
+					end
+				end, "Prev Hunk")
+
+				map("n", "]H", function()
+					gs.nav_hunk("last")
+				end, "Last Hunk")
+
+				map("n", "[H", function()
+					gs.nav_hunk("first")
+				end, "First Hunk")
+
+				map("n", "<leader>gd", gs.diffthis, "Diff This")
+
+				map("n", "<leader>gD", function()
+					gs.diffthis("~")
+				end, "Diff This ~")
+			end,
+		},
+		config = function(_, opts)
+			require("gitsigns").setup(opts)
 		end,
 	},
 
@@ -207,21 +253,54 @@ return {
 	{
 		"folke/flash.nvim",
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-		---@type Flash.Config
 		opts = {},
-    -- stylua: ignore
-    keys = {
-      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
-    },
+		keys = {
+			{
+				"s",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").jump()
+				end,
+				desc = "Flash",
+			},
+			{
+				"S",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").treesitter()
+				end,
+				desc = "Flash Treesitter",
+			},
+			{
+				"r",
+				mode = "o",
+				function()
+					require("flash").remote()
+				end,
+				desc = "Remote Flash",
+			},
+			{
+				"R",
+				mode = { "o", "x" },
+				function()
+					require("flash").treesitter_search()
+				end,
+				desc = "Treesitter Search",
+			},
+			{
+				"<c-s>",
+				mode = { "c" },
+				function()
+					require("flash").toggle()
+				end,
+				desc = "Toggle Flash Search",
+			},
+		},
 	},
 
 	{
 		"folke/todo-comments.nvim",
-		cmd = { "TodoTrouble", "TodoTelescope" },
+		cmd = { "TodoTrouble" },
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		opts = {},
 		keys = {
@@ -239,64 +318,19 @@ return {
 				end,
 				desc = "Previous Todo Comment",
 			},
-			{ "<leader>T", "<cmd>Trouble todo toggle focus=true<cr>", desc = "Todo (Trouble)" },
 			{
-				"<leader>t",
-				"<cmd>Trouble todo toggle filter={tag={TODO,FIX,FIXME,NOTE,HACK}} focus=true<cr>",
-				desc = "Todo/Fix/Fixme/Note/Hack (Trouble)",
-			},
-		},
-	},
-
-	{
-		"folke/trouble.nvim",
-		opts = {}, -- for default options, refer to the configuration section for custom setup.
-		cmd = "Trouble",
-		keys = {
-			{
-				"gd",
-				"<cmd>Trouble lsp_definitions toggle focus=true<cr>",
-				desc = "LSP Definitions (Trouble)",
+				"<leader>st",
+				function()
+					require("todo-comments.fzf").todo()
+				end,
+				desc = "Todo (Trouble)",
 			},
 			{
-				"gD",
-				"<cmd>Trouble lsp_declarations toggle focus=true<cr>",
-				desc = "LSP Declarations (Trouble)",
-			},
-			{
-				"gr",
-				"<cmd>Trouble lsp_references toggle focus=true<cr>",
-				desc = "LSP References (Trouble)",
-			},
-			{
-				"<leader>d",
-				"<cmd>Trouble diagnostics toggle  focus=true filter.buf=0<cr>",
-				desc = "Buffer Diagnostics (Trouble)",
-			},
-			{
-				"<leader>D",
-				"<cmd>Trouble diagnostics toggle focus=true<cr>",
-				desc = "Diagnostics (Trouble)",
-			},
-			{
-				"<leader>s",
-				"<cmd>Trouble symbols toggle focus=false<cr>",
-				desc = "Symbols (Trouble)",
-			},
-			{
-				"<leader>l",
-				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-				desc = "LSP Definitions / references / ... (Trouble)",
-			},
-			{
-				"<leader>q",
-				"<cmd>Trouble loclist toggle<cr>",
-				desc = "Location List (Trouble)",
-			},
-			{
-				"<leader>Q",
-				"<cmd>Trouble qflist toggle<cr>",
-				desc = "Quickfix List (Trouble)",
+				"<leader>sT",
+				function()
+					require("todo-comments.fzf").todo({ keywords = { "TODO", "FIX", "FIXME", "NOTE" } })
+				end,
+				desc = "Todo/Fix/Fixme/Note",
 			},
 		},
 	},
