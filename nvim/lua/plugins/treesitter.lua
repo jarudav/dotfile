@@ -6,7 +6,6 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
 			{
-				"nvim-treesitter/nvim-treesitter-textobjects",
 				"nvim-treesitter/nvim-treesitter-context",
 			},
 		},
@@ -50,30 +49,12 @@ return {
 					node_decremental = "<BS>",
 				},
 			},
-			textobjects = {
-				move = {
-					enable = true,
-					goto_next_start = {
-						["]f"] = "@function.outer",
-						["]c"] = "@class.outer",
-					},
-					goto_next_end = {
-						["]F"] = "@function.outer",
-						["]C"] = "@class.outer",
-					},
-					goto_previous_start = {
-						["[f"] = "@function.outer",
-						["[c"] = "@class.outer",
-					},
-					goto_previous_end = {
-						["[F"] = "@function.outer",
-						["[C"] = "@class.outer",
-					},
-				},
-			},
 		},
 		config = function(_, opts)
 			require("nvim-treesitter.configs").setup(opts)
+			require("treesitter-context").setup({
+				max_lines = 1, -- How many lines the window should span. Values <= 0 mean no limit.
+			})
 		end,
 	},
 }

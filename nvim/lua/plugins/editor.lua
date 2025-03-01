@@ -4,6 +4,7 @@ return {
 		dependencies = {},
 		cmd = "FzfLua",
 		keys = {
+			-- file & buffer
 			{
 				"<leader><leader>",
 				function()
@@ -32,6 +33,7 @@ return {
 				end,
 				desc = "Fzf Files (git-files)",
 			},
+			-- git
 			{
 				"<leader>gc",
 				function()
@@ -46,12 +48,27 @@ return {
 				end,
 				desc = "Fzf Status",
 			},
+			-- search
 			{
 				"<leader>sg",
 				function()
 					require("fzf-lua").live_grep_native()
 				end,
 				desc = "Fzf Live Grep",
+			},
+			{
+				"<leader>sr",
+				function()
+					require("fzf-lua").live_grep_resume()
+				end,
+				desc = "Fzf Live Grep Continue Last Search",
+			},
+			{
+				"<leader>sG",
+				function()
+					require("fzf-lua").live_grep_native()
+				end,
+				desc = "Fzf Grep",
 			},
 			{
 				"<leader>sw",
@@ -77,7 +94,7 @@ return {
 			{
 				"<leader>sk",
 				function()
-					require("fzf-lua").keys()
+					require("fzf-lua").keymaps()
 				end,
 				desc = "Fzf Key Maps",
 			},
@@ -87,6 +104,13 @@ return {
 					require("fzf-lua").builtin()
 				end,
 				desc = "Fzf Files (git-files)",
+			},
+			{
+				"<leader>sh",
+				function()
+					require("fzf-lua").search_history()
+				end,
+				desc = "Fzf Search History",
 			},
 			-- lsp
 			{
@@ -140,8 +164,10 @@ return {
 			"max-perf",
 			file_ignore_patterns = {
 				"%.DS_Store$",
+				"tmp/",
 				"__pycache__",
 				"%.docx",
+				"%.geojson",
 				"%.h5",
 				"%.hdf5",
 				"%.ipynb",
@@ -150,6 +176,7 @@ return {
 				"%.png",
 				"%.pt",
 				"%.pth",
+				"%.xlxs",
 				"%.zip",
 			},
 			winopts = {
@@ -174,66 +201,48 @@ return {
 	},
 
 	{
-		"lewis6991/gitsigns.nvim",
+		"echasnovski/mini.diff",
+		version = false,
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		opts = {
-			signs = {
-				add = { text = "▎" },
-				change = { text = "▎" },
-				delete = { text = "" },
-				topdelete = { text = "" },
-				changedelete = { text = "▎" },
-				untracked = { text = "▎" },
+			view = {
+				style = "sign",
 			},
-			signs_staged = {
-				add = { text = "▎" },
-				change = { text = "▎" },
-				delete = { text = "" },
-				topdelete = { text = "" },
-				changedelete = { text = "▎" },
-				untracked = { text = "▎" },
-			},
-			on_attach = function(buffer)
-				local gs = package.loaded.gitsigns
-
-				local function map(mode, l, r, desc)
-					vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
-				end
-
-				map("n", "]h", function()
-					if vim.wo.diff then
-						vim.cmd.normal({ "]c", bang = true })
-					else
-						gs.nav_hunk("next")
-					end
-				end, "Next Hunk")
-
-				map("n", "[h", function()
-					if vim.wo.diff then
-						vim.cmd.normal({ "[c", bang = true })
-					else
-						gs.nav_hunk("prev")
-					end
-				end, "Prev Hunk")
-
-				map("n", "]H", function()
-					gs.nav_hunk("last")
-				end, "Last Hunk")
-
-				map("n", "[H", function()
-					gs.nav_hunk("first")
-				end, "First Hunk")
-
-				map("n", "<leader>gd", gs.diffthis, "Diff This")
-
-				map("n", "<leader>gD", function()
-					gs.diffthis("~")
-				end, "Diff This ~")
-			end,
 		},
 		config = function(_, opts)
-			require("gitsigns").setup(opts)
+			require("mini.diff").setup(opts)
 		end,
+	},
+
+	{
+		"echasnovski/mini.indentscope",
+		version = false,
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+		opts = {},
+		config = function(_, opts)
+			require("mini.indentscope").setup(opts)
+		end,
+	},
+
+	{
+		"echasnovski/mini.bufremove",
+		version = false,
+		keys = {
+			{
+				"<leader>bd",
+				function()
+					require("mini.bufremove").delete(0, false)
+				end,
+				desc = "Delete Buffer",
+			},
+			{
+				"<leader>bD",
+				function()
+					require("mini.bufremove").delete(0, true)
+				end,
+				desc = "Delete Buffer (Force)",
+			},
+		},
 	},
 
 	{
@@ -248,90 +257,5 @@ return {
 			local wk = require("which-key")
 			wk.setup(opts)
 		end,
-	},
-
-	{
-		"folke/flash.nvim",
-		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-		opts = {},
-		keys = {
-			{
-				"s",
-				mode = { "n", "x", "o" },
-				function()
-					require("flash").jump()
-				end,
-				desc = "Flash",
-			},
-			{
-				"S",
-				mode = { "n", "x", "o" },
-				function()
-					require("flash").treesitter()
-				end,
-				desc = "Flash Treesitter",
-			},
-			{
-				"r",
-				mode = "o",
-				function()
-					require("flash").remote()
-				end,
-				desc = "Remote Flash",
-			},
-			{
-				"R",
-				mode = { "o", "x" },
-				function()
-					require("flash").treesitter_search()
-				end,
-				desc = "Treesitter Search",
-			},
-			{
-				"<c-s>",
-				mode = { "c" },
-				function()
-					require("flash").toggle()
-				end,
-				desc = "Toggle Flash Search",
-			},
-		},
-	},
-
-	{
-		"folke/todo-comments.nvim",
-		cmd = { "TodoTrouble" },
-		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-		opts = {},
-		keys = {
-			{
-				"]x",
-				function()
-					require("todo-comments").jump_next()
-				end,
-				desc = "Next Todo Comment",
-			},
-			{
-				"[x",
-				function()
-					require("todo-comments").jump_prev()
-				end,
-				desc = "Previous Todo Comment",
-			},
-			{
-				"<leader>st",
-				function()
-					require("todo-comments.fzf").todo()
-				end,
-				desc = "Todo (Trouble)",
-			},
-			{
-				"<leader>sT",
-				function()
-					require("todo-comments.fzf").todo({ keywords = { "TODO", "FIX", "FIXME", "NOTE" } })
-				end,
-				desc = "Todo/Fix/Fixme/Note",
-			},
-		},
 	},
 }

@@ -1,92 +1,20 @@
 return {
 	{
-		"hrsh7th/nvim-cmp",
+		"echasnovski/mini.completion",
 		version = false,
 		event = { "InsertEnter" },
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-buffer",
-			"onsails/lspkind-nvim",
-		},
-		opts = function()
-			local cmp = require("cmp")
-			return {
-				completion = {
-					completeopt = "menu,menuone,noinsert",
-				},
-				snippet = {
-					expand = function(args)
-						vim.snippet.expand(args.body)
-					end,
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-					["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<S-CR>"] = cmp.mapping.confirm({
-						behavior = cmp.ConfirmBehavior.Replace,
-						select = true,
-					}),
-				}),
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "snippets" },
-					{ name = "path" },
-				}, {
-					{ name = "buffer" },
-				}),
-				formatting = {
-					format = require("lspkind").cmp_format({
-						mode = "symbol",
-						maxwidth = 50,
-					}),
-				},
-			}
-		end,
+		opts = {},
 		config = function(_, opts)
-			local cmp = require("cmp")
-			cmp.setup(opts)
+			require("mini.completion").setup(opts)
 		end,
-	},
-
-	{
-		"garymjr/nvim-snippets",
-		opts = {
-			friendly_snippets = true,
-		},
-		dependencies = { "rafamadriz/friendly-snippets" },
-		keys = {
-			{
-				"<Tab>",
-				function()
-					return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
-				end,
-				expr = true,
-				silent = true,
-				mode = { "i", "s" },
-			},
-			{
-				"<S-Tab>",
-				function()
-					return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<Tab>"
-				end,
-				expr = true,
-				silent = true,
-				mode = { "i", "s" },
-			},
-		},
 	},
 
 	{
 		"echasnovski/mini.pairs",
-		version = "*",
+		version = false,
 		event = "InsertEnter",
 		opts = {
+			modes = { insert = true, command = true, terminal = false },
 			-- skip autopair when next character is one of these
 			skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
 			-- skip autopair when the cursor is inside these treesitter nodes
@@ -104,7 +32,7 @@ return {
 
 	{
 		"echasnovski/mini.surround",
-		version = "*",
+		version = false,
 		event = "InsertEnter",
 		opts = {},
 		config = function(_, opts)
@@ -114,10 +42,9 @@ return {
 
 	{
 		"echasnovski/mini.bracketed",
-		version = "*",
+		version = false,
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		opts = {
-			comment = { suffix = "" },
 			conflict = { suffix = "" },
 			diagnostic = { suffix = "" },
 			file = { suffix = "" },
@@ -131,7 +58,7 @@ return {
 		"smjonas/inc-rename.nvim",
 		keys = {
 			{
-				"<leader>rn",
+				"<leader>r",
 				function()
 					return ":IncRename " .. vim.fn.expand("<cword>")
 				end,

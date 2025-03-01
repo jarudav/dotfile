@@ -5,7 +5,6 @@ return {
 		dependencies = {},
 		opts = {
 			servers = {
-				-- pylyzer = {},
 				pyright = {},
 				ruff = {},
 				lua_ls = {
@@ -41,7 +40,8 @@ return {
 		},
 		config = function(_, opts)
 			local lspconfig = require("lspconfig")
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 			for severity, icon in pairs(opts.diagnostics.signs.text) do
 				local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
@@ -102,6 +102,7 @@ return {
 					end
 
 					nmap("gca", vim.lsp.buf.code_action, "Code Action")
+					nmap("grn", vim.lsp.buf.rename, "Rename")
 					imap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 					nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 				end,
@@ -144,28 +145,6 @@ return {
 		end,
 		init = function()
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-		end,
-	},
-
-	{
-		"mfussenegger/nvim-lint",
-		event = { "BufWritePost", "BufReadPost", "InsertLeave" },
-		opts = {
-			linters_by_ft = {
-				fish = { "fish" },
-			},
-		},
-		config = function(_, opts)
-			local lint = require("lint")
-			lint.linters_by_ft = opts.linters_by_ft
-
-			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-				group = lint_augroup,
-				callback = function()
-					lint.try_lint()
-				end,
-			})
 		end,
 	},
 }
