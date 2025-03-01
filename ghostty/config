@@ -1,0 +1,13 @@
+theme = Dracula+
+
+font-size = 11
+
+background-opacity = 0.9
+background-blur-radius = 9
+
+macos-titlebar-style = hidden
+
+mouse-hide-while-typing = true
+
+# Keybindings
+keybind = global:cmd+grave_accent=toggle_quick_terminal
