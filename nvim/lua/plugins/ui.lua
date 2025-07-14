@@ -9,15 +9,15 @@ return {
 		end,
 	},
 
-	{
-		"echasnovski/mini.animate",
-		version = false,
-		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-		opts = {},
-		config = function(_, opts)
-			require("mini.animate").setup(opts)
-		end,
-	},
+	-- {
+	-- 	"echasnovski/mini.animate",
+	-- 	version = false,
+	-- 	event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+	-- 	opts = {},
+	-- 	config = function(_, opts)
+	-- 		require("mini.animate").setup(opts)
+	-- 	end,
+	-- },
 
 	{
 		"echasnovski/mini.tabline",

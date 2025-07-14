@@ -116,7 +116,7 @@ return {
 			{
 				"gd",
 				function()
-					require("fzf-lua").lsp_definitions({ jump_to_single_result = true, ignore_current_line = true })
+					require("fzf-lua").lsp_definitions({ jump1 = true, ignore_current_line = true })
 				end,
 				desc = "Fzf Goto Definition",
 			},
@@ -124,7 +124,7 @@ return {
 				"gr",
 				function()
 					require("fzf-lua").lsp_references({
-						jump_to_single_result = true,
+						jump1 = true,
 						ignore_current_line = true,
 						includeDeclaration = false,
 					})
@@ -197,6 +197,31 @@ return {
 		},
 		config = function(_, opts)
 			require("fzf-lua").setup(opts)
+		end,
+	},
+
+	{
+		"echasnovski/mini.files",
+		version = false,
+		keys = {
+			{
+				"<leader>fe",
+				function()
+					require("mini.files").open(vim.api.nvim_buf_get_name(0), false)
+				end,
+				desc = "Open mini.files (Directory of Current File)",
+			},
+			{
+				"<leader>fE",
+				function()
+					require("mini.files").open(vim.uv.cwd(), false)
+				end,
+				desc = "Open mini.files (CWD)",
+			},
+		},
+		opts = {},
+		config = function(_, opts)
+			require("mini.files").setup(opts)
 		end,
 	},
 

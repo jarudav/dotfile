@@ -18,7 +18,7 @@ return {
 			diagnostics = {
 				underline = true,
 				update_in_insert = false,
-				virtual_text = { spacing = 4, source = "if_many", prefix = "●" },
+				virtual_text = { current_line = true, spacing = 4, source = "if_many", prefix = "●" },
 				severity_sort = true,
 				signs = {
 					text = {
@@ -35,12 +35,10 @@ return {
 				border = "rounded",
 				source = "always",
 				prefix = " ",
-				scope = "cursor",
+				scope = "line",
 			},
 		},
 		config = function(_, opts)
-			local lspconfig = require("lspconfig")
-			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 			for severity, icon in pairs(opts.diagnostics.signs.text) do
@@ -55,6 +53,10 @@ return {
 				callback = function(args)
 					local bufnr = args.buf
 					local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+					if client:supports_method("textDocument/completion") then
+						vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+					end
 
 					if client.server_capabilities.documentHighlightProvider then
 						vim.cmd([[
@@ -81,35 +83,33 @@ return {
 						})
 					end
 
-					vim.api.nvim_create_autocmd("CursorHold", {
-						buffer = bufnr,
-						callback = function()
-							vim.diagnostic.open_float(nil, opts.diagnostic_float)
-						end,
-					})
+					-- vim.api.nvim_create_autocmd("CursorHold", {
+					-- 	buffer = bufnr,
+					-- 	callback = function()
+					-- 		vim.diagnostic.open_float(nil, opts.diagnostic_float)
+					-- 	end,
+					-- })
 
-					local nmap = function(keys, func, desc)
+					local nmap = function(keys, func, desc, opt)
 						if desc then
 							desc = "LSP: " .. desc
 						end
-						vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
-					end
-					local imap = function(keys, func, desc)
-						if desc then
-							desc = "LSP: " .. desc
-						end
-						vim.keymap.set("i", keys, func, { buffer = bufnr, desc = desc })
+						vim.keymap.set("n", keys, func, opt)
 					end
 
-					nmap("gca", vim.lsp.buf.code_action, "Code Action")
-					nmap("grn", vim.lsp.buf.rename, "Rename")
-					imap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-					nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+					vim.keymap.set("n", "<space>e", function()
+						vim.diagnostic.open_float(nil, opts.diagnostic_float)
+					end)
+
+					vim.keymap.set("i", "<C-k>", function()
+						vim.lsp.buf.signature_help()
+					end)
 				end,
 			})
 
 			for lsp, opt in pairs(opts.servers) do
-				lspconfig[lsp].setup({
+				vim.lsp.enable(lsp)
+				vim.lsp.config(lsp, {
 					capabilities = capabilities,
 					settings = opt,
 				})

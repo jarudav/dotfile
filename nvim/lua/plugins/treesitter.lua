@@ -2,6 +2,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		version = false,
+		branch = "master",
 		build = ":TSUpdate",
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
@@ -17,7 +18,7 @@ return {
 				function()
 					require("treesitter-context").go_to_context(vim.v.count1)
 				end,
-				desc = "Treesitter go to context",
+				desc = "Treesitter Go To Context",
 			},
 		},
 		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
@@ -28,10 +29,11 @@ return {
 			indent = { enable = true },
 			context_commentstring = { enable = true, enable_autocmd = false },
 			ensure_installed = {
+				"bash",
 				"css",
-				"fish",
 				"json",
 				"html",
+				"nu",
 				"python",
 				"query",
 				"regex",
