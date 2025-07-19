@@ -1,35 +1,5 @@
 return {
 	{
-		"echasnovski/mini.icons",
-		version = false,
-		lazy = true,
-		opts = {},
-		init = function()
-			require("mini.icons").mock_nvim_web_devicons()
-		end,
-	},
-
-	-- {
-	-- 	"echasnovski/mini.animate",
-	-- 	version = false,
-	-- 	event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-	-- 	opts = {},
-	-- 	config = function(_, opts)
-	-- 		require("mini.animate").setup(opts)
-	-- 	end,
-	-- },
-
-	{
-		"echasnovski/mini.tabline",
-		version = false,
-		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-		opts = {},
-		config = function(_, opts)
-			require("mini.tabline").setup(opts)
-		end,
-	},
-
-	{
 		"norcalli/nvim-colorizer.lua",
 		version = "*",
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
@@ -47,17 +17,6 @@ return {
 				-- Available modes: foreground, background
 				mode = "background", -- Set the display mode.
 			})
-		end,
-	},
-
-	{
-		"echasnovski/mini.statusline",
-		version = false,
-		opts = {
-			set_vim_settings = false,
-		},
-		config = function(_, opts)
-			require("mini.statusline").setup(opts)
 		end,
 	},
 }
