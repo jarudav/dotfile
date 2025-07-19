@@ -5,7 +5,16 @@ return {
 		dependencies = {},
 		opts = {
 			servers = {
-				pyright = {},
+				pyright = {
+					pyright = {
+						disableOrganizeImports = true,
+					},
+					python = {
+						analysis = {
+							ignore = { "*" },
+						},
+					},
+				},
 				ruff = {},
 				lua_ls = {
 					Lua = {
@@ -39,7 +48,7 @@ return {
 			},
 		},
 		config = function(_, opts)
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			-- local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 			for severity, icon in pairs(opts.diagnostics.signs.text) do
 				local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
@@ -83,20 +92,6 @@ return {
 						})
 					end
 
-					-- vim.api.nvim_create_autocmd("CursorHold", {
-					-- 	buffer = bufnr,
-					-- 	callback = function()
-					-- 		vim.diagnostic.open_float(nil, opts.diagnostic_float)
-					-- 	end,
-					-- })
-
-					local nmap = function(keys, func, desc, opt)
-						if desc then
-							desc = "LSP: " .. desc
-						end
-						vim.keymap.set("n", keys, func, opt)
-					end
-
 					vim.keymap.set("n", "<space>e", function()
 						vim.diagnostic.open_float(nil, opts.diagnostic_float)
 					end)
@@ -110,7 +105,7 @@ return {
 			for lsp, opt in pairs(opts.servers) do
 				vim.lsp.enable(lsp)
 				vim.lsp.config(lsp, {
-					capabilities = capabilities,
+					-- capabilities = capabilities,
 					settings = opt,
 				})
 			end
