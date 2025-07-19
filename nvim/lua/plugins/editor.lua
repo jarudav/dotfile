@@ -240,16 +240,6 @@ return {
 	},
 
 	{
-		"echasnovski/mini.indentscope",
-		version = false,
-		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-		opts = {},
-		config = function(_, opts)
-			require("mini.indentscope").setup(opts)
-		end,
-	},
-
-	{
 		"echasnovski/mini.bufremove",
 		version = false,
 		keys = {
