@@ -4,4 +4,5 @@
 .mono/
 /zsh/
 /iterm2/
-!/fish/*.fish
+/fish/
+/uv/
