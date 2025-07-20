@@ -1,7 +1,8 @@
 command_timeout = 1000
+add_newline = false
 
 [directory]
 truncation_length = 8
 
 [line_break]
-disabled = false
+disabled = true
