@@ -59,16 +59,23 @@ return {
 			{
 				"<leader>sr",
 				function()
-					require("fzf-lua").live_grep_resume()
+					require("fzf-lua").live_grep({ resume = true })
 				end,
 				desc = "Fzf Live Grep Continue Last Search",
 			},
 			{
-				"<leader>sG",
+				"<leader>sq",
 				function()
-					require("fzf-lua").live_grep_native()
+					require("fzf-lua").lgrep_quickfix()
 				end,
-				desc = "Fzf Grep",
+				desc = "Fzf the quickfix list",
+			},
+			{
+				"<leader>sl",
+				function()
+					require("fzf-lua").lgrep_loclist()
+				end,
+				desc = "Fzf the location list",
 			},
 			{
 				"<leader>sw",
@@ -188,6 +195,7 @@ return {
 					["<c-b>"] = "preview-page-up",
 				},
 				fzf = {
+					["ctrl-q"] = "select-all+accept",
 					["ctrl-d"] = "half-page-down",
 					["ctrl-u"] = "half-page-up",
 					["ctrl-f"] = "preview-page-down",
@@ -197,31 +205,6 @@ return {
 		},
 		config = function(_, opts)
 			require("fzf-lua").setup(opts)
-		end,
-	},
-
-	{
-		"echasnovski/mini.files",
-		version = false,
-		keys = {
-			{
-				"<leader>fe",
-				function()
-					require("mini.files").open(vim.api.nvim_buf_get_name(0), false)
-				end,
-				desc = "Open mini.files (Directory of Current File)",
-			},
-			{
-				"<leader>fE",
-				function()
-					require("mini.files").open(vim.uv.cwd(), false)
-				end,
-				desc = "Open mini.files (CWD)",
-			},
-		},
-		opts = {},
-		config = function(_, opts)
-			require("mini.files").setup(opts)
 		end,
 	},
 
