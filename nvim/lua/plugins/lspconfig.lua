@@ -5,13 +5,20 @@ return {
 		dependencies = {},
 		opts = {
 			servers = {
-				pyright = {
-					pyright = {
-						disableOrganizeImports = true,
-					},
-					python = {
-						analysis = {
-							ignore = { "*" },
+				-- pyright = {
+				-- 	pyright = {
+				-- 		disableOrganizeImports = true,
+				-- 	},
+				-- 	python = {
+				-- 		analysis = {
+				-- 			ignore = { "*" },
+				-- 		},
+				-- 	},
+				-- },
+				ty = {
+					ty = {
+						experimental = {
+							rename = true,
 						},
 					},
 				},
@@ -48,8 +55,6 @@ return {
 			},
 		},
 		config = function(_, opts)
-			-- local capabilities = vim.lsp.protocol.make_client_capabilities()
-
 			for severity, icon in pairs(opts.diagnostics.signs.text) do
 				local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
 				local hl = "DiagnosticSign" .. name
@@ -68,11 +73,6 @@ return {
 					end
 
 					if client.server_capabilities.documentHighlightProvider then
-						-- vim.cmd([[
-						--   hi! LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-						--   hi! LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-						--   hi! LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-						--   ]])
 						vim.api.nvim_create_augroup("lsp_document_highlight", {
 							clear = false,
 						})
@@ -105,7 +105,6 @@ return {
 			for lsp, opt in pairs(opts.servers) do
 				vim.lsp.enable(lsp)
 				vim.lsp.config(lsp, {
-					-- capabilities = capabilities,
 					settings = opt,
 				})
 			end
@@ -119,7 +118,6 @@ return {
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
-				fish = { "fish_indent" },
 				python = { "ruff_format", "ruff_organize_imports" },
 				javascript = { "prettier" },
 				css = { "prettier" },

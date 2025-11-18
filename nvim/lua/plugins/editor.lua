@@ -119,6 +119,13 @@ return {
 				end,
 				desc = "Fzf Search History",
 			},
+			{
+				"<leader>sc",
+				function()
+					require("fzf-lua").command_history()
+				end,
+				desc = "Fzf Command History",
+			},
 			-- lsp
 			{
 				"gd",
@@ -141,14 +148,14 @@ return {
 			{
 				"<leader>d",
 				function()
-					require("fzf-lua").lsp_document_diagnostics()
+					require("fzf-lua").diagnostics_document()
 				end,
 				desc = "Fzf Document Diagnostics",
 			},
 			{
 				"<leader>D",
 				function()
-					require("fzf-lua").lsp_workspace_diagnostics()
+					require("fzf-lua").diagnostics_workspace()
 				end,
 				desc = "Fzf Workspace Diagnostics",
 			},
@@ -175,16 +182,26 @@ return {
 				"__pycache__",
 				"%.docx",
 				"%.geojson",
+				"%.grib",
 				"%.h5",
 				"%.hdf5",
 				"%.ipynb",
 				"%.jpg",
+				"%.nc",
 				"%.pdf",
 				"%.png",
 				"%.pt",
 				"%.pth",
 				"%.xlxs",
 				"%.zip",
+				"%.shp",
+				"%.shx",
+				"%.shp.xml",
+				"%.cpg",
+				"%.dbf",
+				"%.prj",
+				"%.sbn",
+				"%.sbx",
 			},
 			winopts = {
 				preview = { default = "bat_native" },
@@ -220,27 +237,6 @@ return {
 		config = function(_, opts)
 			require("mini.diff").setup(opts)
 		end,
-	},
-
-	{
-		"echasnovski/mini.bufremove",
-		version = false,
-		keys = {
-			{
-				"<leader>bd",
-				function()
-					require("mini.bufremove").delete(0, false)
-				end,
-				desc = "Delete Buffer",
-			},
-			{
-				"<leader>bD",
-				function()
-					require("mini.bufremove").delete(0, true)
-				end,
-				desc = "Delete Buffer (Force)",
-			},
-		},
 	},
 
 	{
