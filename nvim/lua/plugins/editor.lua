@@ -192,6 +192,7 @@ return {
 				"%.png",
 				"%.pt",
 				"%.pth",
+				"%.pkl",
 				"%.xlxs",
 				"%.zip",
 				"%.shp",
@@ -202,6 +203,8 @@ return {
 				"%.prj",
 				"%.sbn",
 				"%.sbx",
+				"%.tif",
+				"%.tiff",
 			},
 			winopts = {
 				preview = { default = "bat_native" },
