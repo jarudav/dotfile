@@ -435,35 +435,11 @@ vim.cmd.colorscheme("tokyonight")
 
 require("which-key").setup()
 
-require("nvim-treesitter").setup({
-	sync_install = false,
-	auto_install = false,
-	highlight = { enable = true },
-	indent = { enable = true },
-	context_commentstring = { enable = true, enable_autocmd = false },
-	ensure_installed = {
-		"bash",
-		"css",
-		"json",
-		"html",
-		"nu",
-		"python",
-		"query",
-		"regex",
-		"sql",
-		"xml",
-		"yaml",
-	},
-	ignore_install = {},
-	incremental_selection = {
-		enable = true,
-		keymaps = {
-			init_selection = "<CR>",
-			node_incremental = "<CR>",
-			scope_incremental = false,
-			node_decremental = "<BS>",
-		},
-	},
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "css", "json", "html", "python" },
+	callback = function()
+		vim.treesitter.start()
+	end,
 })
 
 require("treesitter-context").setup({ max_lines = 1 })
