@@ -178,7 +178,7 @@ vim.pack.add({
 	{ src = "https://github.com/folke/which-key.nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
-	{ src = "https://github.com/nvim-mini/mini.surround" },
+	{ src = "https://github.com/kylechui/nvim-surround" },
 	{ src = "https://github.com/nvim-mini/mini.diff" },
 })
 
@@ -444,5 +444,4 @@ vim.api.nvim_create_autocmd("FileType", {
 
 require("treesitter-context").setup({ max_lines = 1 })
 
-require("mini.surround").setup()
 require("mini.diff").setup({ view = { style = "sign" } })
